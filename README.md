@@ -16,14 +16,14 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
 
 # 02 — Esercizi
 ### Esercizio 1/2 — Visualizzazione posizione ISS e satelliti
-**Obiettivo:** Visualizzare in tempo reale la posizione della **Stazione Spaziale Internazionale (ISS)** e dei **satelliti attivi** in orbita terrestre.  
-**Preview:** [Visualizzazione ISS e satelliti](#) 
+**Obiettivo:** Visualizzare in tempo reale la posizione della **Stazione Spaziale Internazionale (ISS)** e dei **satelliti attivi** in orbita terrestre. 
+**Preview:** [Visualizzazione ISS e satelliti](#) <br>
 
 # 03 — Progetti
 ### Progetto 1 — NASA70
-**Obiettivo:** Creare una pagina web divulgativa che permetta di esplorare in modo innovativo e interattivo i dati, le immagini e i materiali prodotti dalla NASA sulle attività spaziali.
-**Concept**: [Descrittivo delle intenzioni e della struttura del progetto](#) 
-**Preview:** [Rapporti natuarali](#) 
+**Obiettivo:** Creare una pagina web divulgativa che permetta di esplorare in modo innovativo e interattivo i dati, le immagini e i materiali prodotti dalla NASA sulle attività spaziali.<br>
+**Concept**: [Descrittivo delle intenzioni e della struttura del progetto](#) <br>
+**Preview:** [Rapporti natuarali](#) <br>
 
 # Credits
 Progetto di Luca Mazzola
