@@ -17,7 +17,7 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
 # 02 — Esercizi
 ### Esercizio 1/2 — Visualizzazione posizione ISS e satelliti
 **Obiettivo:** Visualizzare in tempo reale la posizione della **Stazione Spaziale Internazionale (ISS)** e dei **satelliti attivi** in orbita terrestre. 
-**Preview:** [Visualizzazione ISS e satelliti](#) <br>
+**Preview:** [Visualizzazione ISS e satelliti](https://lucamazzolaa.github.io/NASA70/esercizi/esercizio1-2/) <br>
 
 # 03 — Progetti
 ### Progetto 1 — NASA70
