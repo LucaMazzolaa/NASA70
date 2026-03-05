@@ -7,7 +7,6 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
 - **02_Esercizi**
 - **03_Progetti**
 - **04_Credits**
-<br><br>
 
 ## 01_Struttura della Repository
 - **esercizi/**  
