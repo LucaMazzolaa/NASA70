@@ -7,12 +7,12 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
 - 03 — Progetti
 
 ## 01 — Struttura della Repository
-| Directory  | Contenuto |
-|------------|-----------|
-| esercizi/  | Sperimentazioni settimanali e sviluppo di micro-interazioni |
-| progetti/  | Raccolta dei progetti realizzati dai briefing |
-| assets/    | Risorse multimediali e materiali di supporto |
-| docs/      | Documentazione di progetto, analisi e appunti |
+| Directory | Contenuto |
+|-----------|-----------|
+| esercizi/ | Sperimentazioni settimanali |
+| progetti/ | Progetti dei briefing |
+| assets/   | Risorse multimediali |
+| docs/     | Documentazione e appunti |
 
 ## 02 — Esercizi
 ### Esercizio 1/2 — Visualizzazione posizione ISS e satelliti
