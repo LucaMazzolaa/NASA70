@@ -2,7 +2,7 @@
 Repository ufficiale dedicato al corso di Media and Interaction dell’anno accademico 2025/26. Il progetto raccoglie la ricerca, il concept e lo sviluppo tecnico delle pagine web realizzate durante il corso.
 
 
-## Indice dei contenuti
+## 00_Indice dei contenuti
 - **01_Struttura della Repository**
 - **02_Esercizi**
 - **03_Progetti**
