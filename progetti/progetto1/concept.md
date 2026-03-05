@@ -1,6 +1,4 @@
-# Descrittivo delle intenzioni e della struttura del progetto
-
-### Proporzioni Naturali
+# Proporzioni Naturali: descrittivo delle intenzioni e della struttura del progetto
 
 **Intenzioni**  
 Analizzando criticamente immagini e visualizzazioni online, spesso imprecise o poco chiare riguardo le reali proporzioni dei pianeti, le loro dimensioni e le distanze orbitali, il progetto mira a rappresentare questi concetti in modo chiaro e semplificato. L’obiettivo è creare una visualizzazione visivamente efficace e intuitiva, che renda immediatamente comprensibili le relazioni tra dimensioni e distanze dei pianeti, privilegiando un approccio di comunicazione visiva.
