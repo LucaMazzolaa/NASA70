@@ -37,4 +37,4 @@ SUPSI, Bachelor of Arts in Comunicazione visiva<br>
 A.A. 2025/26, SEM IV<br>
 CV429 Progetto II M&I<br>
 
-Docenti: Andreas Gysin, Giovanni Profeta
+Docenti: Andreas Gysin & Giovanni Profeta
