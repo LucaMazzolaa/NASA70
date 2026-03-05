@@ -7,7 +7,7 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
 - **02_Esercizi**
 - **03_Progetti**
 - **04_Credits**
-
+<br>
 
 ## 01_Struttura della Repository
 - **esercizi/**  
@@ -18,20 +18,20 @@ Repository ufficiale dedicato al corso di Media and Interaction dell’anno acca
   Risorse multimediali e materiali di supporto
 - **docs/**  
   Documentazione di progetto, analisi e appunti
-
+<br>
 
 ## 02_Esercizi
 ### Esercizio 1/2 — Visualizzazione posizione ISS e satelliti
 **Obiettivo:** Visualizzare in tempo reale la posizione della **Stazione Spaziale Internazionale (ISS)** e dei **satelliti attivi** in orbita terrestre. 
 **Preview:** [Visualizzazione ISS e satelliti](https://lucamazzolaa.github.io/NASA70/esercizi/esercizio1-2/) <br>
-
+<br>
 
 ## 03_Progetti
 ### Progetto 1 — NASA70
 **Obiettivo:** Creare una pagina web divulgativa che permetta di esplorare in modo innovativo e interattivo i dati, le immagini e i materiali prodotti dalla NASA sulle attività spaziali.<br>
 **Concept**: [Descrittivo delle intenzioni e della struttura del progetto](#) <br>
 **Preview:** [Rapporti natuarali](#) <br>
-
+<br>
 
 ## 04_Credits
 Progetto di Luca Mazzola
