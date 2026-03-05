@@ -1,7 +1,6 @@
 # Media & Interaction SP25/26
 Repository ufficiale dedicato al corso di Media and Interaction dell’anno accademico 2025/26. Il progetto raccoglie la ricerca, il concept e lo sviluppo tecnico delle pagine web realizzate durante il corso.
 
-
 ## 00_Indice dei contenuti
 - **01_Struttura della Repository**
 - **02_Esercizi**
@@ -36,4 +35,4 @@ SUPSI, Bachelor of Arts in Comunicazione visiva<br>
 A.A. 2025/26, SEM IV<br>
 CV429 Progetto II M&I<br>
 
-Docenti: Andreas Gysin, Giovanni Profeta
+Docenti: Andreas Gysin & Giovanni Profeta
