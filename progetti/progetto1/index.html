@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA // Record Database</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: monospace;
+            background: black;
+            color: white;
+            overflow: hidden; 
+        }
+
+        /* =========================================
+           SCHERMATA DI CARICAMENTO (PRELOADER)
+           ========================================= */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            height: 60px; 
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .loading-bar-wrapper {
+            width: 280px;
+            height: 6px; 
+            background: #222;
+            overflow: hidden;
+            border-radius: 0; 
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: white;
+            transition: width 1s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* =========================================
+           STRUTTURA PRINCIPALE
+           ========================================= */
+        .container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            position: absolute;
+            left: 40px; 
+            top: 45px;  
+            z-index: 2;
+        }
+
+        .nasa-header img {
+            height: 190px; 
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            cursor: pointer;
+        }
+
+        /* Menu a sinistra */
+        .menu {
+            width: 350px;
+            height: auto;
+            position: absolute;
+            left: 40px; 
+            top: 340px; 
+            font-size: 20px;
+            font-weight: 100;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+            border-left: 4px solid #555; 
+            padding-left: 25px; 
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            opacity: 0.6;
+            position: relative;
+            display: block;
+        }
+
+        .menu a::before {
+            content: '';
+            position: absolute;
+            left: -25px; 
+            top: 50%;
+            width: 15px; 
+            height: 4px; 
+            background: #555;
+            transition: all 0.2s;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            left: -32px; 
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px; 
+            height: 10px;
+            background: #555;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .menu a:hover, .menu a.active {
+            opacity: 1;
+            font-weight: bold;
+        }
+
+        .menu a:hover::before, .menu a.active::before { 
+            background: white; 
+        }
+        
+        .menu a:hover::after, .menu a.active::after {
+            background: white; 
+            transform: translateY(-50%) scale(1.3); 
+        }
+
+        /* Logo NASA a DESTRA */
+        .nasa-logo-vertical {
+            position: absolute;
+            right: 70px; 
+            bottom: 120px; /* Linea di allineamento inferiore (120px dal basso) */
+            height: 30px; 
+            width: auto;
+            transform: rotate(90deg); 
+            transform-origin: right bottom; 
+            filter: brightness(0) invert(1);
+            opacity: 0.25;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .titolo-contenuto {
+            position: absolute;
+            top: 340px; 
+            left: 765px; 
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .content {
+            position: absolute;
+            top: 380px; /* Linea di inizio contenuti (380px dall'alto) */
+            left: 765px; 
+            height: calc(100vh - 420px); 
+            width: 950px; 
+            overflow-y: auto; 
+            font-size: 20px; 
+            line-height: 1.5;
+            word-wrap: break-word;
+            padding-right: 20px;
+            scrollbar-width: none;         
+            -ms-overflow-style: none;      
+            z-index: 2;
+        }
+
+        .content::-webkit-scrollbar { display: none; }
+
+        section { display: none; }
+        section.active-section { display: block; }
+
+        section > * {
+            opacity: 0;
+        }
+
+        .cascade-element {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: cascadeReveal 0.5s ease forwards;
+        }
+
+        @keyframes cascadeReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section p { margin-bottom: 25px; }
+
+        /* =========================================
+           RETTANGOLI VISUALI
+           ========================================= */
+        .visual-box {
+            display: block; 
+            width: 100%; 
+            height: calc(100vh - 500px); 
+            border: 1px solid #555;
+            margin: 0 0 40px 0; 
+            cursor: pointer;
+            position: relative;
+            background: black; 
+            transition: border-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .visual-box:hover {
+            border-color: white;
+        }
+
+        .fs-indicator {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 14px;
+            color: #555;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Testo modificato in "Espandi" */
+        .fs-indicator::after {
+            content: '[ ] Espandi';
+        }
+
+        .visual-box:hover .fs-indicator {
+            color: white;
+        }
+
+        .visual-box.fs-active {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            z-index: 10000;
+            border: 1px solid #222; 
+            cursor: zoom-out;
+        }
+
+        /* Testo modificato in "Chiudi" */
+        .visual-box.fs-active .fs-indicator::after {
+            content: '[X] Chiudi';
+            color: white;
+        }
+
+        .infoSidebar {
+            position: fixed;
+            bottom: 40px; 
+            left: 40px; 
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.4;
+            max-width: 600px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+
+        @media (max-width: 1600px) {
+            .titolo-contenuto, .content { left: 450px; }
+            .content { width: calc(100vw - 500px); }
+        }
+
+        @media (max-width: 900px) {
+            html, body { overflow-y: auto; }
+            .container { height: auto; min-height: 100vh; display: flex; flex-direction: column; padding: 40px 35px; overflow: visible; }
+            .sidebar-header, .menu, .titolo-contenuto, .content, .infoSidebar { position: relative; top: auto; left: auto; bottom: auto; right: auto; width: 100%; }
+            .nasa-header img { height: 80px; }
+            .sidebar-header { margin-bottom: 40px; }
+            .menu { margin-bottom: 50px; }
+            .titolo-contenuto { margin-bottom: 20px; font-size: 24px; }
+            .content { height: auto; overflow-y: visible; padding-right: 0; }
+            .nasa-logo-vertical { display: none; }
+            .infoSidebar { position: relative; margin-top: 50px; padding-top: 20px; border-top: 1px solid #333; }
+            
+            .visual-box {
+                width: 100%;
+                height: 350px; 
+                margin: 0 0 25px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <img src="assets/nasa_logo.svg" alt="NASA Logo" class="preloader-logo">
+        <div class="loading-bar-wrapper">
+            <div class="loading-bar" id="loading-bar"></div>
+        </div>
+        <div class="loading-text">CONNESSIONE DATABASE...</div>
+    </div>
+
+    <div class="container">
+        
+        <div class="sidebar-header">
+            <div class="nasa-header">
+                <a href="#intro" id="logo-link">
+                    <img src="assets/titolo.svg" alt="Titolo">
+                </a>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="#intro" class="nav-link active" id="intro-link">Introduzione</a>
+            <a href="#storia" class="nav-link">Contesto storico</a>
+            <a href="#mappa" class="nav-link">Mappa sistema solare</a>
+            <a href="#dimensioni" class="nav-link">Dimensioni</a>
+            <a href="#distanze" class="nav-link">Distanze</a>
+            <a href="#fonti" class="nav-link">Fonti</a>
+        </nav>
+
+        <img src="assets/nasa_logo.svg" alt="NASA Logo Vertical" class="nasa-logo-vertical">
+
+        <div class="titolo-contenuto" id="section-title">
+            Introduzione
+        </div>
+
+        <div class="content" id="right-content">
+            
+            <section id="intro" class="active-section">
+                <p>Nel 2028 la NASA celebrerà il suo 70° anniversario. Fondata nel 1958, l’agenzia ha contribuito in modo determinante alla conoscenza e all’esplorazione dello spazio, raccogliendo nel tempo una grande quantità di dati scientifici sull’universo, sui pianeti, sulle stelle e sul Sistema solare.</p>
+                <p>Nonostante queste informazioni siano oggi facilmente accessibili, le dimensioni dei pianeti e le distanze che li separano risultano spesso difficili da immaginare. Molte immagini e rappresentazioni diffuse online semplificano o alterano le proporzioni per ragioni grafiche, rendendo poco chiara la reale scala del Sistema solare.</p>
+                <p>Questa pagina nasce con l’obiettivo di proporre una visualizzazione più chiara e fedele delle proporzioni naturali, utilizzando dati scientifici ufficiali per rappresentare in modo più comprensibile le dimensioni dei pianeti e le immense distanze che li separano.</p>
+            </section>
+
+            <section id="storia">
+                <p>L'evoluzione della comprensione del cosmo è passata dal modello geocentrico di Tolomeo alla rivoluzione copernicana, fino alle moderne sonde spaziali.</p>
+                <p>Oggi, i record NASA celebrano decenni di scoperte fondamentali che hanno ridefinito i confini della conoscenza umana.</p>
+            </section>
+
+            <section id="mappa">
+                <div class="visual-box" onclick="this.classList.toggle('fs-active')">
+                    <div class="fs-indicator"></div>
+                </div>
+            </section>
+
+            <section id="dimensioni">
+                <div class="visual-box" onclick="this.classList.toggle('fs-active')">
+                    <div class="fs-indicator"></div>
+                </div>
+            </section>
+
+            <section id="distanze">
+                <div class="visual-box" onclick="this.classList.toggle('fs-active')">
+                    <div class="fs-indicator"></div>
+                </div>
+            </section>
+
+            <section id="fonti">
+                <p>Record estratti dai database ufficiali NASA NSSDCA e JPL Solar System Dynamics.</p>
+                <p>Dataset aggiornato in tempo reale via connessione Deep Space Network.</p>
+            </section>
+
+        </div>
+
+        <div class="infoSidebar">
+            SUPSI DACD // A.A. 2025/26 // CV2 // Luca Mazzola<br>
+            CV429 Progetto II M&I // Andreas Gysin & Giovanni Profeta
+        </div>
+
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section');
+        const titleDisplay = document.getElementById('section-title');
+        const contentBox = document.getElementById('right-content');
+        const logoLink = document.getElementById('logo-link');
+        const introLink = document.getElementById('intro-link');
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const loadingBar = document.getElementById('loading-bar');
+            const preloader = document.getElementById('preloader');
+            const defaultSection = document.getElementById('intro');
+
+            setTimeout(() => {
+                loadingBar.style.width = '100%';
+            }, 100);
+
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                setTimeout(() => {
+                    if(defaultSection) triggerCascadeAnimation(defaultSection);
+                }, 100); 
+            }, 1100); 
+        });
+
+        function triggerCascadeAnimation(section) {
+            const children = section.querySelectorAll(':scope > *');
+            children.forEach((child, index) => {
+                child.classList.remove('cascade-element');
+                void child.offsetWidth; 
+                child.classList.add('cascade-element');
+                child.style.animationDelay = `${index * 150}ms`;
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                const targetId = this.getAttribute('href').substring(1);
+                sections.forEach(sec => sec.classList.remove('active-section'));
+                const targetSection = document.getElementById(targetId);
+                targetSection.classList.add('active-section');
+                triggerCascadeAnimation(targetSection);
+                titleDisplay.innerText = this.innerText;
+                
+                document.querySelectorAll('.visual-box').forEach(box => {
+                    box.classList.remove('fs-active');
+                });
+
+                if (window.innerWidth <= 900) {
+                    window.scrollTo({ top: titleDisplay.offsetTop - 20, behavior: 'smooth' });
+                } else {
+                    contentBox.scrollTop = 0;
+                }
+            });
+        });
+
+        logoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            introLink.click();
+            if (window.innerWidth <= 900) { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        });
+    </script>
+</body>
+</html>
