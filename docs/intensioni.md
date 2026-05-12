@@ -1,13 +1,15 @@
-# Proporzioni Naturali: descrittivo delle intenzioni e della struttura del progetto
+# NASA 70: descrittivo delle intenzioni e della struttura del progetto
 
-**Intenzioni**  
-Analizzando criticamente immagini e visualizzazioni online, spesso imprecise o poco chiare riguardo le reali proporzioni dei pianeti, le loro dimensioni e le distanze orbitali, il progetto mira a rappresentare questi concetti in modo chiaro e semplificato. L’obiettivo è creare una visualizzazione visivamente efficace e intuitiva, che renda immediatamente comprensibili le relazioni tra dimensioni e distanze dei pianeti, privilegiando un approccio di comunicazione visiva.
+**Intenzioni**
+Il progetto nasce con il duplice scopo di introdurre il tema celebrativo dei settant'anni della fondazione della NASA e di fungere da portale di accesso per i tredici elaborati sulla conquista dello spazio realizzati durante la prima fase del corso. Un elemento cardine della pagina è la progettazione del logo dedicato "NASA 70". L'intenzione è quella di andare oltre il semplice marchio grafico statico, sviluppando un elemento visivo animato e interattivo che catturi l'attenzione dell'utente e diventi parte integrante dell'esperienza di navigazione.
 
-**Dati utilizzati**  
-Il progetto si basa su dati scientifici ufficiali, comprendenti il diametro dei pianeti, la loro distanza media dal Sole, il periodo orbitale e, se rilevante, altre proprietà come la massa. Parte delle informazioni sarà recuperata tramite API e dataset pubblici che forniscono dati astronomici corretti e verificati. Oltre alla raccolta dei dati, è prevista una componente di ricerca storica e scientifica per comprendere come siano state calcolate le dimensioni e le distanze dei pianeti. Verranno analizzati i dataset ufficiali della NASA e altre fonti affidabili, studiando anche i metodi di misurazione storici, al fine di contestualizzare le rappresentazioni e garantire la correttezza scientifica.
+Per quanto riguarda la fruizione dei progetti, ispirandosi al concetto di "interfaccia generosa", l'obiettivo è invitare l'utente a un'esplorazione visiva e dinamica attraverso un'architettura a due livelli. La visualizzazione principale è concepita per superare la classica concezione di archivio, strutturando e mostrando i progetti come una vera e propria rete di collegamento. In questa modalità i lavori degli studenti appaiono visivamente interconnessi, restituendo il senso di un'esplorazione corale e condivisa. A questa si affianca una seconda visualizzazione più lineare a indice, pensata per offrire una consultazione rapida, strutturata e tradizionale dei contenuti.
 
-**Modalità di presentazione**  
-La visualizzazione sarà realizzata tramite una pagina web interattiva sviluppata con HTML, CSS e JavaScript. Verranno create rappresentazioni semplificate in 2D e 3D, valutando quale soluzione risulti più efficace per comunicare i concetti. La presentazione punterà a coniugare precisione scientifica e chiarezza visiva, includendo strumenti di interazione come zoom, scroll e animazioni per facilitare l’esplorazione delle proporzioni e delle distanze nel sistema solare. 
+**Dati utilizzati**
+Il nucleo dei dati è costituito dalle informazioni relative ai tredici progetti degli studenti. I metadati, definiti e concordati in modo collaborativo da tutta la classe, comprendono il titolo, l'autore, una breve descrizione, i tag tematici, un'immagine di anteprima e il link di destinazione di ogni singolo lavoro. Tutte queste informazioni sono strutturate e richiamate dinamicamente attraverso un'API centralizzata basata su un file JSON. A questi dati si aggiungono i testi di contesto necessari per spiegare agli utenti lo scopo generale dell'iniziativa e celebrare i settant'anni della NASA e della ricerca aerospaziale.
 
-**Target**  
-Il progetto è rivolto a un pubblico generalista interessato allo spazio, alla divulgazione scientifica e alla visualizzazione dei dati.
+**Modalità di presentazione**
+L'output finale consiste in una pagina web interattiva sviluppata utilizzando HTML, CSS e JavaScript. L'interfaccia si sviluppa attorno al concetto di esplorazione visiva e offre strumenti flessibili per la navigazione. L'ambiente principale è uno spazio tridimensionale interattivo dove ogni elaborato diventa un nodo all'interno di una rete di collegamenti.
+
+**Target**
+Il progetto è rivolto a un pubblico generalista interessato allo spazio, all’esplorazione spaziale e al mondo NASA, con l’obiettivo di avvicinare gli utenti ai temi della ricerca aerospaziale attraverso una modalità visiva e interattiva. La piattaforma si indirizza a persone curiose, appassionate di astronomia e divulgazione scientifica, ma anche a studenti e docenti che desiderano esplorare i diversi progetti realizzati sul tema della conquista dello spazio.
