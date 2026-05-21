@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immersive Cylindrical Gallery</title>
+    <style>
+        :root {
+            --bg: #f4f4f4;
+            --text: #000000;
+            --accent: #111111;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- UI OVERLAYS --- */
+        .ui-layer {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .top-right-btn {
+            position: absolute;
+            top: 30px;
+            right: 80px; /* Spazio per il badge SOTD */
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .sotd-badge {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: var(--accent);
+            color: #fff;
+            width: 40px;
+            height: 120px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            pointer-events: auto;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            pointer-events: auto;
+        }
+
+        .bottom-nav span { cursor: pointer; color: #888; transition: color 0.3s; }
+        .bottom-nav span:hover { color: #000; }
+        .bottom-nav span.active { color: #000; display: flex; align-items: center; gap: 5px;}
+        .bottom-nav span.active::before { content: '▶'; font-size: 8px; }
+
+        .view-toggle {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            gap: 15px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .view-toggle span { opacity: 0.5; transition: opacity 0.3s; }
+        .view-toggle span.active { opacity: 1; }
+
+        /* --- 3D SCENE --- */
+        #scene {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            /* La prospettiva bassa genera l'effetto Fisheye */
+            perspective: 600px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+        }
+
+        #scene:active { cursor: grabbing; }
+
+        #world {
+            position: relative;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .item {
+            position: absolute;
+            /* Centratura dell'elemento rispetto al pivot */
+            top: -120px; 
+            left: -180px;
+            width: 360px;
+            height: 240px;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            pointer-events: none;
+        }
+
+        .item-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #888;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateZ(20px); /* Testo leggermente sollevato in 3D */
+        }
+
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #ddd;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ui-layer">
+        <div class="logo">Studio™</div>
+        
+        <div class="top-right-btn">
+            🗓 Book a call
+        </div>
+        
+        <div class="sotd-badge">
+            W. SOTD
+        </div>
+
+        <div class="view-toggle">
+            <span class="active">Grid</span> / <span>List</span>
+        </div>
+
+        <div class="bottom-nav">
+            <span>Index</span>
+            <span class="active">Projects</span>
+            <span>Services</span>
+            <span>Store</span>
+            <span>Enquire</span>
+        </div>
+    </div>
+
+    <div id="scene">
+        <div id="world"></div>
+    </div>
+
+    <script>
+        const world = document.getElementById('world');
+        const scene = document.getElementById('scene');
+
+        // Configurazione Geometria Cilindrica
+        const cols = 12; // Immagini per anello
+        const rows = 3;  // Numero di anelli
+        const itemWidth = 360;
+        const itemHeight = 240;
+        const gapY = 120; // Spazio verticale tra le righe
+
+        // Calcolo del raggio affinché le card formino un cerchio perfetto
+        const radius = Math.round((itemWidth / 2) / Math.tan(Math.PI / cols)) + 80;
+
+        // Generazione delle card
+        let index = 1;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const item = document.createElement('div');
+                item.className = 'item';
+                
+                // Offset verticale per distribuire le 3 righe (Alto, Centro, Basso)
+                const rowOffset = (r - 1) * (itemHeight + gapY); 
+                const angle = c * (360 / cols);
+                
+                // Posizionamento matematico in 3D
+                item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px) translateY(${rowOffset}px)`;
+                
+                // Label testuale
+                const label = document.createElement('div');
+                label.className = 'item-label';
+                label.innerText = `ND_${String(index).padStart(3, '0')}`;
+                
+                // Immagine (usiamo segnaposto da Unsplash con varianti cromatiche)
+                const img = document.createElement('img');
+                img.className = 'item-image';
+                img.src = `https://picsum.photos/600/400?random=${index}`;
+                
+                item.appendChild(label);
+                item.appendChild(img);
+                world.appendChild(item);
+                
+                index++;
+            }
+        }
+
+        // Sistema di Navigazione e Inerzia
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        
+        // Target = dove vogliamo arrivare / Current = dove siamo ora (per l'easing)
+        let targetRotX = 0, targetRotY = 0;
+        let currentRotX = 0, currentRotY = 0;
+
+        // Limiti di inclinazione verticale
+        const maxRotX = 25; 
+
+        // Gestione Mouse
+        scene.addEventListener('mousedown', e => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            
+            targetRotY += dx * 0.15; // Sensibilità orizzontale
+            targetRotX -= dy * 0.15; // Sensibilità verticale
+            
+            // Impedisce alla telecamera di ribaltarsi sottosopra
+            targetRotX = Math.max(-maxRotX, Math.min(maxRotX, targetRotX));
+            
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mouseleave', () => isDragging = false);
+
+        // Gestione Touch (Mobile)
+        scene.addEventListener('touchstart', e => {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchmove', e => {
+            if (!isDragging) return;
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+            
+            targetRotY += dx * 0.2;
+            targetRotX -= dy * 0.2;
+            targetRotX = Math.max(-maxRotX, Math.min(maxRotX, targetRotX));
+            
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => isDragging = false);
+
+        // Aggiungi supporto per scorrimento con Trackpad/Rotella
+        scene.addEventListener('wheel', e => {
+            targetRotY -= e.deltaX * 0.1;
+            targetRotX -= e.deltaY * 0.1;
+            targetRotX = Math.max(-maxRotX, Math.min(maxRotX, targetRotX));
+        });
+
+        // Loop di animazione per un movimento fluido (Lerp / Easing)
+        function animate() {
+            currentRotX += (targetRotX - currentRotX) * 0.08;
+            currentRotY += (targetRotY - currentRotY) * 0.08;
+            
+            world.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Avvia l'animazione iniziale con una leggera rotazione per far capire che è 3D
+        targetRotY = 20; 
+        animate();
+
+    </script>
+</body>
+</html>
