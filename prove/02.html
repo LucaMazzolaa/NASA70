@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naughty Duk - 3D Sphere Experience</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f3f3f3;
+            --text: #050505;
+            --font-main: 'Space Grotesk', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            overflow: hidden; /* Blocca lo scroll nativo */
+            width: 100vw;
+            height: 100vh;
+            cursor: grab;
+        }
+
+        body:active {
+            cursor: grabbing;
+        }
+
+        /* --- UI OVERLAYS (Naughty Duk Style) --- */
+        .ui-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Lascia passare i click al 3D sottostante */
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 40px;
+        }
+
+        .ui-top, .ui-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            pointer-events: auto; /* Riattiva i click sui bottoni */
+        }
+
+        .ui-top { align-items: flex-start; }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        .book-call {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .book-call:hover {
+            background: #333;
+        }
+
+        .book-call img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .bottom-nav {
+            display: flex;
+            gap: 25px;
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .bottom-nav span {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .bottom-nav span:hover { opacity: 0.5; }
+        .bottom-nav .active { pointer-events: none; }
+        .bottom-nav .active::before {
+            content: '▶ ';
+        }
+
+        .toggle-pill {
+            background: #111;
+            color: #555;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        .toggle-pill span.active { color: #fff; }
+
+        /* --- 3D ENGINE SCENE --- */
+        #viewport {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            perspective: 700px; /* Più è basso, più l'effetto Fisheye è forte */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #world {
+            position: relative;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .project-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 320px;
+            height: 190px;
+            transform-origin: 50% 50%;
+            transform-style: preserve-3d;
+            margin-left: -160px; /* Centratura esatta */
+            margin-top: -95px;
+            transition: filter 0.3s ease;
+        }
+
+        .project-card:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+
+        .project-label {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #777;
+            letter-spacing: 1px;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #ddd;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            pointer-events: none; /* Evita che il drag venga bloccato dall'immagine */
+            /* Curvatura simulata tramite bordi leggermente arrotondati */
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ui-layer">
+        <div class="ui-top">
+            <div class="logo">Naughty<br>Duk</div>
+            <div class="book-call">
+                <span>🗓 BOOK A CALL</span>
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Avatar">
+            </div>
+        </div>
+
+        <div class="toggle-pill">
+            <span class="active">GRID</span> / <span>LIST</span>
+        </div>
+
+        <div class="ui-bottom">
+            <div style="width: 100px;"></div> <div class="bottom-nav">
+                <span>INDEX</span>
+                <span class="active">PROJECTS</span>
+                <span>SERVICES</span>
+                <span>STORE</span>
+                <span>ENQUIRE</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewport">
+        <div id="world">
+            </div>
+    </div>
+
+    <script>
+        const world = document.getElementById('world');
+
+        // Parametri della sfera
+        const radius = 1000; // Distanza dal centro (dimensione della stanza sferica)
+        const rows = 3;      // Numero di righe (Sopra, Centro, Sotto)
+        const cols = 12;     // Numero di progetti per riga
+        
+        // Immagini placeholder di alta qualità
+        const images = [
+            'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1613909207039-6b173b755cc1?q=80&w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=800&auto=format&fit=crop'
+        ];
+
+        let projectCounter = 1;
+
+        // Generazione del layout sferico
+        for (let r = 0; r < rows; r++) {
+            // Calcoliamo la latitudine (l'inclinazione su/giù). 
+            // -22 gradi (sopra), 0 gradi (centro), 22 gradi (sotto)
+            const lat = (r - 1) * 22; 
+
+            for (let c = 0; c < cols; c++) {
+                // Calcoliamo la longitudine (la posizione intorno a noi)
+                const lon = c * (360 / cols);
+
+                const card = document.createElement('div');
+                card.className = 'project-card';
+
+                // Costruiamo la stringa di trasformazione 3D
+                // 1. Ruotiamo per orientare la "telecamera"
+                // 2. Trasliamo indietro sull'asse Z locale per allontanare la card
+                card.style.transform = `rotateY(${lon}deg) rotateX(${lat}deg) translateZ(${-radius}px)`;
+
+                // Etichetta "ND_00X"
+                const label = document.createElement('div');
+                label.className = 'project-label';
+                label.innerText = `ND_${String(projectCounter).padStart(3, '0')}`;
+
+                // Immagine
+                const img = document.createElement('img');
+                img.className = 'project-image';
+                img.src = images[projectCounter % images.length];
+
+                // Colori random per dare quel tocco neon/sperimentale (come il rettangolo verde)
+                if (Math.random() > 0.85) {
+                    img.src = '';
+                    img.style.background = Math.random() > 0.5 ? '#b4ff00' : '#ff0055';
+                }
+
+                card.appendChild(label);
+                card.appendChild(img);
+                world.appendChild(card);
+
+                projectCounter++;
+            }
+        }
+
+        // --- SISTEMA DI DRAG E INERZIA ---
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        
+        // Rotazione attuale e bersaglio (per l'effetto fluido/inerzia)
+        let currentRotX = 0, currentRotY = 0;
+        let targetRotX = 0, targetRotY = 0;
+
+        document.addEventListener('pointerdown', (e) => {
+            if(e.target.closest('.ui-layer')) return; // Non trascinare se clicchi sui menu
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            // Sensibilità del movimento
+            targetRotY += deltaX * 0.15;
+            targetRotX -= deltaY * 0.15; 
+
+            // Limitiamo lo sguardo in alto e in basso per non capovolgere la stanza
+            targetRotX = Math.max(-35, Math.min(35, targetRotX));
+
+            startX = e.clientX;
+            startY = e.clientY;
+        });
+
+        document.addEventListener('pointerup', () => {
+            isDragging = false;
+        });
+
+        // Loop di animazione per l'inerzia (Linear Interpolation)
+        function animate() {
+            // Il valore attuale si avvicina dolcemente al target (il fattore 0.05 crea la fluidità)
+            currentRotX += (targetRotX - currentRotX) * 0.05;
+            currentRotY += (targetRotY - currentRotY) * 0.05;
+
+            // Ruotiamo il mondo intero. Se noi giriamo a destra, il mondo gira a sinistra.
+            world.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        // Avvia l'animazione
+        animate();
+    </script>
+</body>
+</html>
