@@ -6,7 +6,7 @@ Progetto 1: La conquista dello spazio
 
 # NASA70
 Autore: Luca Mazzola \
-[NASA70](https://github.com/ixd-supsi/2026/tree/main/esempi/es06_array_7)
+[NASA70](https://lucamazzolaa.github.io/NASA70/)
 
 
 ## Introduzione e tema
