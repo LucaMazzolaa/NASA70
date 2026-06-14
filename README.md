@@ -30,12 +30,17 @@ L’interfaccia del progetto è organizzata secondo una struttura chiara e minim
 | 3 | **`about.html`** | About | Sezione informativa dedicata al contesto del progetto |
 
 ### Menu globale fisso
+<img width="1512" height="80" alt="Screenshot 2026-06-14 alle 14 56 25" src="https://github.com/user-attachments/assets/c362518e-bd6b-4eb1-af81-0f0db1eac339" />
+
 Il menu superiore costituisce l’elemento di navigazione principale e presenta il nome del progetto sulla sinistra, il logo dedicato al 70º anniversario della NASA al centro, riprendendo la posizione occupata dal marchio nel sito ufficiale dell’agenzia, e le sezioni Projects e About sulla destra, garantendo un accesso immediato alle diverse aree della piattaforma.
 
+
 ### Logo
+<img width="4000" height="1333" alt="logo" src="https://github.com/user-attachments/assets/244020ce-042a-4147-8573-c895c439bc0f" />
+
 Il progetto mantiene il logo storico della NASA come elemento centrale dell’identità visiva, preservandone la riconoscibilità istituzionale e il valore simbolico. Al logo si affianca un 7 geometrico, ispirato al concept del logo realizzato per il 40º anniversario, scelto come riferimento per la sua capacità di sintetizzare celebrazione e chiarezza formale. Questa soluzione permette di costruire un segno grafico coerente con il 70º anniversario, mantenendo un equilibrio tra tradizione e reinterpretazione contemporanea.
 Nella mia interpretazione progettuale, il logo celebrativo sostituisce temporaneamente il marchio NASA all'interno del sito ufficiale per tutta la durata delle celebrazioni del 70º anniversario.
-<img width="1280" height="848" alt="logo_40_anniversario" src="https://github.com/user-attachments/assets/d53a73bc-6dab-449b-9d76-01930e5fd823" />
+
 
 ### 1. NASA 70 (index.html)
 La homepage si distingue per un approccio immersivo e non convenzionale. Invece di una struttura statica, l’utente si trova di fronte a un’unica immagine di copertina che diventa spazio di esplorazione. Attraverso lo scroll o il trascinamento, è possibile navigare all’interno di questa superficie visiva continua, scoprendo progressivamente i diversi progetti senza uscire dalla dimensione principale. L’unica azione di uscita dall’esperienza è la selezione di un elemento, che conduce direttamente alla pagina del progetto scelto.
