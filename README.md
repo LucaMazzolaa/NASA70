@@ -32,7 +32,7 @@ L’interfaccia del progetto è organizzata secondo una struttura chiara e minim
 | 3 | **`about.html`** | About | Sezione informativa dedicata al contesto del progetto |
 
 ### Menu globale fisso
-<img width="1512" height="80" alt="Screenshot 2026-06-14 alle 14 56 25" src="https://github.com/user-attachments/assets/c362518e-bd6b-4eb1-af81-0f0db1eac339" />
+
 
 Il menu superiore costituisce l’elemento di navigazione principale e presenta il nome del progetto sulla sinistra, il logo dedicato al 70º anniversario della NASA al centro, riprendendo la posizione occupata dal marchio nel sito ufficiale dell’agenzia, e le sezioni Projects e About sulla destra, garantendo un accesso immediato alle diverse aree della piattaforma.
 
