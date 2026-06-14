@@ -17,6 +17,7 @@ L’obiettivo è valorizzare il patrimonio informativo e culturale dell’agenzi
 
 ## Riferimenti progettuali
 Le principali fonti di ispirazione per il progetto derivano da una raccolta di immagini, interfacce e riferimenti visivi analizzati durante la fase di ricerca. In particolare è emersa la ricorrenza di immagini grandangolari, viste panoramiche e forme circolari che richiamano pianeti, superfici planetarie, finestrini delle navicelle spaziali, visiere dei caschi degli astronauti e il logo stesso della NASA. Questi elementi contribuiscono a trasmettere un senso di vastità, osservazione e immersione, caratteristiche che hanno influenzato in modo significativo la progettazione della homepage del sito.
+<img width="4000" height="667" alt="Immagini" src="https://github.com/user-attachments/assets/5c1da6ed-813e-42a1-92d7-943025bba177" />
 
 
 ## Design dell’interfaccia e modalità di interazione
