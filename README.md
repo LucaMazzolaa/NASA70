@@ -62,9 +62,231 @@ La sezione About è concepita come uno spazio esclusivamente tipografico, dedica
 
 
 ## Tecnologia usata
-Il progetto poggia su una solida architettura front-end nativa, sviluppata in HTML5, CSS3 e JavaScript (ES6). HTML definisce la struttura semantica dell’interfaccia, mentre CSS ne gestisce l’estetica attraverso un design system responsivo basato su variabili, calcoli fluidi e tipografia personalizzata. JavaScript funge da motore logico dell’applicazione: orchestra il DOM, gestisce gli eventi dell’utente e sincronizza l’interfaccia con i dati e le librerie esterne.
+Il progetto poggia su una solida architettura front-end nativa, sviluppata in **HTML5, CSS3 e JavaScript (ES6)**. HTML definisce la struttura semantica dell’interfaccia, mentre CSS ne gestisce l'estetica attraverso un design system responsivo basato su variabili, calcoli fluidi e tipografia personalizzata. JavaScript funge da motore logico dell’applicazione: orchestra il DOM, gestisce gli eventi dell’utente e sincronizza l’interfaccia con i dati e le librerie esterne.<br>
 
-Di seguito vengono presentati tre estratti di codice chiave che sono stati fondamentali nello sviluppo del progetto, in quanto determinanti per la costruzione della logica interattiva:
+Di seguito vengono presentati tre estratti di codice chiave tratti dal file **`index.html`**, che rappresenta la pagina più complessa e tecnicamente articolata del progetto. In questa sezione si concentra infatti la maggior parte della logica interattiva, con la gestione dell’esperienza esplorativa principale, delle animazioni e dei meccanismi di navigazione che regolano l’accesso alle altre parti del sistema.
+
+### Rendering Avanzato e Shader Distorsivi (Three.js e GLSL)
+Per ottenere l’effetto di profondità e curvatura della griglia visiva, si è optato per l’utilizzo di materiali basati su shader personalizzati (`ShaderMaterial`). Il codice GLSL iniettato a livello di vertice calcola la distanza dal centro dello schermo e altera la posizione sull’asse Z, creando una deformazione a lente parabolica che viene calcolata direttamente dalla GPU.
+
+**HTML**
+```html
+<div id="viewport">
+    <div id="canvas"></div>
+</div>
+```
+
+**CSS**
+```css
+#viewport { 
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    z-index: 1
+    overflow: hidden
+}
+
+#canvas { 
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+}
+```
+
+**JavaScript**
+```javascript
+const s = String.fromCharCode(59)
+
+const vertexShader = `
+    varying vec2 vUv ${s}
+    void main() {
+        vUv = uv ${s}
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0) ${s}
+        
+        float dist = length(mvPosition.xy) ${s}
+        mvPosition.z += dist * dist * 0.015 ${s} 
+        
+        gl_Position = projectionMatrix * mvPosition ${s}
+    }
+`
+
+// Assegnazione del materiale custom ai piani della griglia
+const material = new THREE.ShaderMaterial({
+    uniforms: {
+        tDiffuse: { value: currentData.tex },
+        uPickingColor: { value: new THREE.Color(imageId) },
+        uIsPicking: { value: 0.0 }
+    },
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
+    side: THREE.DoubleSide
+})
+```
+
+
+### Fetch Dati e Texturing Dinamico (API e CanvasTexture)
+L’architettura carica i riferimenti progettuali in modo asincrono da un endpoint JSON esterno. Parallelamente, per visualizzare la tipografia all'interno dello spazio 3D, un nastro di testo scorrevole viene disegnato dinamicamente su un elemento nativo HTML Canvas e convertito in una `CanvasTexture` continua, applicata poi come rivestimento ai modelli geometrici.
+
+**HTML**
+```html
+<script>
+    const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
+    const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
+    const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
+
+    fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
+    // [...]
+</script>
+
+<script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.136.0'
+    // [...] Modulo principale dell'applicazione
+</script>
+```
+
+**CSS**
+```css
+html, body { 
+    width: 100%
+    height: 100%
+    background-color: var(--bg)
+    font-family: var(--ui-font)
+    overflow: hidden
+    user-select: none
+    -webkit-font-smoothing: antialiased
+    color: var(--text)
+}
+```
+
+**JavaScript**
+```javascript
+fetch('https://ixd-supsi.github.io/n70api/data.json')
+    .then(res => res.json())
+    .then(data => {
+        let projects = []
+        data.forEach(p => {
+            // [...] Logica di parsing ed estrazione immagini omessa per brevità
+            projects.push({ 
+                file: imgFilename, 
+                url: p.url || '#'
+            })
+        })
+        initThree(projects)
+    })
+
+// Generazione texture tipografica dinamica
+const textCanvas = document.createElement('canvas')
+textCanvas.width = textWidth
+textCanvas.height = 128
+const ctx = textCanvas.getContext('2d')
+ctx.font = '40px "Helvetica", "HelveticaFallback", sans-serif'
+ctx.fillStyle = '#888888' 
+ctx.fillText(textStr, 0, 64)
+
+const textTexture = new THREE.CanvasTexture(textCanvas)
+textTexture.wrapS = THREE.RepeatWrapping
+textTexture.wrapT = THREE.RepeatWrapping
+```
+
+
+### Griglia Infinita e Interazione Pixel-Perfect (WebGLRenderTarget)
+La navigazione fluida e sconfinata è ottenuta matematicamente riposizionando gli elementi che escono dal campo visivo sul lato opposto della scena durante il ciclo di rendering (`requestAnimationFrame`). Per gestire l'interazione del cursore si è implementato un sistema di "Color Picking": la scena viene fotografata fuori schermo assegnando un colore univoco a ciascun elemento per identificare l'oggetto puntato analizzando le coordinate del pixel selezionato.
+
+**HTML**
+```html
+<header>
+    <div class="header-left">
+        <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
+    </div>
+    <div class="logo-container">
+        <img src="assets/logo.svg" alt="N70 Logo" class="hover-target">
+    </div>
+    <nav>
+        <a href="projects.html" class="hover-target">Projects</a>
+        <a href="about.html" class="hover-target">About</a>
+    </nav>
+</header>
+```
+
+**CSS**
+```css
+header { 
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    padding: 20px 20px 20px 20px
+    display: grid
+    grid-template-columns: 1fr auto 1fr
+    align-items: center
+    z-index: 10000
+    background: #000000
+    pointer-events: auto
+}
+
+nav a { 
+    text-decoration: none
+    color: #ffffff !important
+    font-size: 16px
+    font-weight: 500
+    transition: color 0.3s var(--ease)
+    cursor: pointer
+}
+```
+
+**JavaScript**
+```javascript
+function getHoveredObject(clientX, clientY) {
+    planes.forEach(p => {
+        if (p.material.uniforms.uIsPicking) {
+            p.material.uniforms.uIsPicking.value = 1.0
+        }
+    })
+    
+    camera.setViewOffset(window.innerWidth, window.innerHeight, clientX, clientY, 1, 1)
+    
+    renderer.setRenderTarget(pickingTexture)
+    renderer.clear()
+    renderer.render(scene, camera)
+    
+    camera.clearViewOffset()
+    renderer.readRenderTargetPixels(pickingTexture, 0, 0, 1, 1, pixelBuffer)
+    renderer.setRenderTarget(null)
+    
+    // [...] Ripristino shader omesso per brevità
+    
+    const id = (pixelBuffer[0] << 16) | (pixelBuffer[1] << 8) | pixelBuffer[2]
+    return planes.find(p => p.userData.id === id)
+}
+
+function animate() {
+    requestAnimationFrame(animate)
+
+    scrollX += (targetScrollX - scrollX) * 0.05
+    scrollY += (targetScrollY - scrollY) * 0.05
+
+    group.position.x = scrollX
+    group.position.y = scrollY
+
+    // Logica spaziale di riposizionamento continuo
+    planes.forEach(plane => {
+        const globalX = plane.position.x + scrollX
+        const globalY = plane.position.y + scrollY
+
+        if (globalX > limitX) plane.position.x -= totalWidth
+        if (globalX < -limitX) plane.position.x += totalWidth
+
+        if (globalY > limitY) plane.position.y -= totalHeight
+        if (globalY < -limitY) plane.position.y += totalHeight
+    })
+
+    renderer.render(scene, camera)
+}
+```
 
 
 ## Target e contesto d’uso
