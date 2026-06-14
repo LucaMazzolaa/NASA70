@@ -66,7 +66,7 @@ Il progetto poggia su una solida architettura front-end nativa, sviluppata in **
 
 Di seguito vengono presentati tre estratti di codice chiave tratti dal file **`index.html`**, che rappresenta la pagina più complessa e tecnicamente articolata del progetto. In questa sezione si concentra infatti la maggior parte della logica interattiva, con la gestione dell’esperienza esplorativa principale, delle animazioni e dei meccanismi di navigazione che regolano l’accesso alle altre parti del sistema.
 
-### Rendering Avanzato e Shader Distorsivi (Three.js e GLSL)
+### Rendering avanzato e Shader distorsivi (Three.js e GLSL)
 Per ottenere l’effetto di profondità e curvatura della griglia visiva, si è optato per l’utilizzo di materiali basati su shader personalizzati (`ShaderMaterial`). Il codice GLSL iniettato a livello di vertice calcola la distanza dal centro dello schermo e altera la posizione sull’asse Z, creando una deformazione a lente parabolica che viene calcolata direttamente dalla GPU.
 
 **HTML**
@@ -128,7 +128,7 @@ const material = new THREE.ShaderMaterial({
 ```
 
 
-### Fetch Dati e Texturing Dinamico (API e CanvasTexture)
+### Fetch dati e Texturing dinamico (API e CanvasTexture)
 L’architettura carica i riferimenti progettuali in modo asincrono da un endpoint JSON esterno. Parallelamente, per visualizzare la tipografia all'interno dello spazio 3D, un nastro di testo scorrevole viene disegnato dinamicamente su un elemento nativo HTML Canvas e convertito in una `CanvasTexture` continua, applicata poi come rivestimento ai modelli geometrici.
 
 **HTML**
@@ -146,20 +146,6 @@ L’architettura carica i riferimenti progettuali in modo asincrono da un endpoi
     import * as THREE from 'https://cdn.skypack.dev/three@0.136.0'
     // [...] Modulo principale dell'applicazione
 </script>
-```
-
-**CSS**
-```css
-html, body { 
-    width: 100%
-    height: 100%
-    background-color: var(--bg)
-    font-family: var(--ui-font)
-    overflow: hidden
-    user-select: none
-    -webkit-font-smoothing: antialiased
-    color: var(--text)
-}
 ```
 
 **JavaScript**
@@ -193,7 +179,7 @@ textTexture.wrapT = THREE.RepeatWrapping
 ```
 
 
-### Griglia Infinita e Interazione Pixel-Perfect (WebGLRenderTarget)
+### Griglia infinita e interazione Pixel-Perfect (WebGLRenderTarget)
 La navigazione fluida e sconfinata è ottenuta matematicamente riposizionando gli elementi che escono dal campo visivo sul lato opposto della scena durante il ciclo di rendering (`requestAnimationFrame`). Per gestire l'interazione del cursore si è implementato un sistema di "Color Picking": la scena viene fotografata fuori schermo assegnando un colore univoco a ciascun elemento per identificare l'oggetto puntato analizzando le coordinate del pixel selezionato.
 
 **HTML**
