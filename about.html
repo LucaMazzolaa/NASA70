@@ -1,190 +1,220 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N70 | About</title>
-    <style>
-        /* --- SUISSE INTL TYPOGRAPHY --- */
-        @font-face { font-family: 'SuisseIntl'; src: url('SuisseIntl-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; }
-        @font-face { font-family: 'SuisseIntl'; src: url('SuisseIntl-SemiBold.ttf') format('truetype'); font-weight: 600; font-style: normal; }
-        @font-face { font-family: 'SuisseIntl'; src: url('SuisseIntl-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; }
-        @font-face { font-family: 'SuisseIntl'; src: url('SuisseIntl-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; }
-        @font-face { font-family: 'SuisseIntl'; src: url('SuisseIntl-Light.ttf') format('truetype'); font-weight: 300; font-style: normal; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA 70 | About</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<style>
+:root { --bg: #f6f6f6 }
+:root { --text: #000000 }
+:root { --text-50: #7c7c7c }
+:root { --text-30: #b2b2b2 }
+:root { --ui-font: 'Helvetica', 'HelveticaFallback', sans-serif }
+:root { --ease: cubic-bezier(0.19, 1, 0.22, 1) }
 
-        :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --text-50: #7c7c7c; 
-            --text-30: #b2b2b2; 
-            --ui-font: 'SuisseIntl', sans-serif;
-            --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        }
+* { margin: 0 }
+* { padding: 0 }
+* { box-sizing: border-box }
 
-        /* Reset and Global Styles */
-        * { cursor: none !important; margin: 0; padding: 0; box-sizing: border-box }
+html { -ms-overflow-style: none }
+html { scrollbar-width: none }
+html { overflow-x: hidden }
 
-        html, body {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            overflow-x: hidden;
-            width: 100%; 
-            height: 100%;
-        }
+body { -ms-overflow-style: none }
+body { scrollbar-width: none }
+body { overflow-x: hidden }
+body { background-color: var(--bg) }
+body { font-family: var(--ui-font) }
+body { color: var(--text) }
+body { -webkit-font-smoothing: antialiased }
+body { text-rendering: optimizeLegibility }
+body { font-weight: 600 }
+body { font-size: 16px }
+body { line-height: 1.15 }
+body { min-height: 100vh }
+body { display: flex }
+body { flex-direction: column }
 
-        body {
-            background-color: var(--bg);
-            font-family: var(--ui-font);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-            font-weight: 500; 
-            font-size: 18px; 
-            line-height: 1.15;
-            user-select: none;
-        }
+header { position: fixed }
+header { top: 0 }
+header { left: 0 }
+header { width: 100% }
+header { padding: 20px 20px 20px 20px }
+header { display: grid }
+header { grid-template-columns: 1fr auto 1fr }
+header { align-items: center }
+header { z-index: 10000 }
+header { background: #000000 }
+header { pointer-events: auto }
 
-        @media (min-width: 769px) {
-            html, body {
-                overflow: hidden;
-                height: 100%;
-            }
-        }
+.header-left { display: flex }
+.header-left { justify-content: flex-start }
+.header-left { align-items: center }
 
-        /* --- HEADER --- */
-        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 20px 40px 20px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: flex-start; z-index: 10000; background: transparent; pointer-events: none }
-        .header-left { display: flex; justify-content: flex-start; pointer-events: auto }
-        .site-title { font-size: 18px; font-weight: 500; color: var(--text); letter-spacing: 0.01em; cursor: pointer }
-        .logo-container { display: flex; justify-content: center; pointer-events: auto }
-        .logo-container img { height: 45px; width: auto; display: block }
-        nav { display: flex; justify-content: flex-end; gap: 20px; align-items: flex-start; pointer-events: auto }
-        nav a { text-decoration: none; color: var(--text-30) !important; font-size: 18px; font-weight: 500; letter-spacing: 0.01em; transition: color 0.3s var(--ease); line-height: 1 }
-        nav a:hover { color: var(--text) !important }
-        nav a.active { color: var(--text) !important }
+.site-title { font-size: 16px }
+.site-title { font-weight: 500 }
+.site-title { color: #ffffff }
+.site-title { letter-spacing: 0.01em }
+.site-title { cursor: pointer }
 
-        /* --- CURSOR --- */
-        #cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; opacity: 0; mix-blend-mode: difference; color: #ffffff }
-        .cursor-dot { position: absolute; top: 0; left: 0; width: 14px; height: 14px; background-color: #ffffff; border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.25s var(--ease), height 0.25s var(--ease), background-color 0.3s var(--ease), opacity 0.3s var(--ease), transform 0.3s var(--ease) }
-        #cursor.expand .cursor-dot { width: 35px; height: 35px }
+.logo-container { display: flex }
+.logo-container { justify-content: center }
+.logo-container img { height: 45px }
+.logo-container img { width: auto }
+.logo-container img { display: block }
+.logo-container img { cursor: pointer }
 
-        /* --- ABOUT SPECIFIC WRAPPER --- */
-        #about-wrapper {
-            padding: 140px 20px 60px 20px; 
-            max-width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+nav { display: flex }
+nav { justify-content: flex-end }
+nav { gap: 40px }
+nav { align-items: center }
+nav a { text-decoration: none }
+nav a { color: #ffffff !important }
+nav a { font-size: 16px }
+nav a { font-weight: 500 }
+nav a { letter-spacing: 0.01em }
+nav a { transition: color 0.3s var(--ease) }
+nav a { line-height: 1 }
+nav a { cursor: pointer }
 
-        @media (min-width: 769px) {
-            #about-wrapper {
-                height: 100%;
-                min-height: auto;
-            }
-        }
+.page-container { padding: 140px 20px 20px 20px }
+.page-container { display: flex }
+.page-container { flex-direction: column }
+.page-container { flex-grow: 1 }
 
-        /* --- LARGE INTRO TEXT --- */
-        .intro-text {
-            font-size: clamp(18px, 3vw, 48px); 
-            line-height: 1.1;
-            font-weight: 500;
-            max-width: 96%;
-            letter-spacing: -0.01em;
-        }
+.page-title { font-size: 60px }
+.page-title { font-weight: 500 }
+.page-title { color: var(--text) }
+.page-title { margin-bottom: 35px }
+.page-title { line-height: 1 }
+.page-title { letter-spacing: -0.02em }
 
-        /* --- ABOUT SECONDARY TEXT GRID --- */
-        .about-text-grid {
-            display: grid;
-            grid-template-columns: 2fr 2.5fr 4fr 1fr; 
-            width: 100%;
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text);
-            align-items: flex-start;
-        }
+.layout-grid { display: flex }
+.layout-grid { flex-direction: row }
+.layout-grid { gap: 5% }
+.layout-grid { flex-grow: 1 }
 
-        .about-col-1 { grid-column: 1 / 2; padding-right: 40px }
-        .about-col-2 { grid-column: 2 / 3; padding-right: 40px }
-        .about-col-3 { grid-column: 3 / 4; padding-right: 40px }
-        
-        /* Link styling with hover effect */
-        .about-col-3 a { 
-            color: var(--text); 
-            text-decoration: underline;
-            transition: color 0.3s var(--ease), mix-blend-mode 0.3s var(--ease);
-            display: inline-block;
-        }
-        .about-col-3 a:hover { 
-            mix-blend-mode: difference; 
-            color: #ffffff;
-        }
+.sidebar { width: 18% }
+.sidebar { flex-shrink: 0 }
+.sidebar { display: flex }
+.sidebar { flex-direction: column }
 
-        /* --- MOBILE RESPONSIVENESS --- */
-        @media (max-width: 768px) {
-            #about-wrapper { justify-content: flex-start; gap: 60px }
-            .intro-text { max-width: 98% } 
-            .about-text-grid { grid-template-columns: 1fr; gap: 30px }
-            .about-col-1, .about-col-2, .about-col-3 { grid-column: 1 / -1; padding-right: 0 }
-        }
-    </style>
+.main-content { flex-grow: 1 }
+.main-content { display: flex }
+.main-content { flex-direction: column }
+.main-content { align-items: flex-start }
+.main-content { padding-top: 0 }
+
+.intro-text { font-size: 28px }
+.intro-text { font-weight: 500 }
+.intro-text { line-height: 1.3 }
+.intro-text { width: 100% }
+.intro-text { max-width: 1015px }
+.intro-text { letter-spacing: -0.01em }
+.intro-text { margin-bottom: 50px }
+.intro-text { text-align: left }
+
+.about-text-grid { display: grid }
+.about-text-grid { grid-template-columns: 1fr 1fr }
+.about-text-grid { gap: 5% }
+.about-text-grid { width: 100% }
+.about-text-grid { max-width: 1015px }
+.about-text-grid { font-size: 16px }
+.about-text-grid { font-weight: 500 }
+.about-text-grid { color: var(--text) }
+.about-text-grid { align-items: flex-start }
+
+.about-col-1 { padding-right: 20px }
+.about-col-1 { font-weight: 400 }
+.about-col-1 { margin-top: auto }
+
+.about-col-2 { padding-right: 20px }
+.about-col-2 a { color: #D83933 }
+.about-col-2 a { text-decoration: underline }
+.about-col-2 a { transition: color 0.3s var(--ease) }
+.about-col-2 a { display: inline-block }
+.about-col-2 a { cursor: pointer }
+.about-col-2 a:hover { color: var(--text) }
+
+.about-col-3 { padding-right: 0 }
+.about-col-3 a { color: #D83933 }
+.about-col-3 a { text-decoration: underline }
+.about-col-3 a { transition: color 0.3s var(--ease) }
+.about-col-3 a { display: inline-block }
+.about-col-3 a { cursor: pointer }
+.about-col-3 a:hover { color: var(--text) }
+
+@media (max-width: 1350px) {
+.layout-grid { flex-direction: column }
+.layout-grid { gap: 40px }
+.sidebar { width: 100% }
+.sidebar { order: 2 }
+.sidebar { margin-top: 40px }
+.main-content { order: 1 }
+.about-text-grid { grid-template-columns: 1fr }
+.about-text-grid { gap: 30px }
+.about-col-1 { padding-right: 0 }
+.about-col-1 { margin-top: 0 }
+.about-col-2 { padding-right: 0 }
+.about-col-3 { padding-right: 0 }
+}
+
+@media (min-width: 1600px) {
+.intro-text { margin-bottom: 90px }
+}
+</style>
 </head>
 <body>
 
-<div id="cursor">
-    <div class="cursor-dot"></div>
-</div>
-
 <header>
-    <div class="header-left">
-        <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA70</span>
-    </div>
-    <div class="logo-container">
-        <img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
-    </div>
-    <nav>
-        <a href="index.html" class="hover-target">Explore</a>
-        <a href="projects.html" class="hover-target">Projects</a>
-        <a href="about.html" class="hover-target active">About</a>
-    </nav>
+<div class="header-left">
+<span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
+</div>
+<div class="logo-container">
+<img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
+</div>
+<nav>
+<a href="projects.html" class="hover-target">Projects</a>
+<a href="about.html" class="hover-target">About</a>
+</nav>
 </header>
 
-<main id="about-wrapper">
-    <div class="intro-text">
-        Founded in 1958, NASA is celebrating its 70th anniversary this year. This project aims to highlight the agency’s vast archive of data, images, and documents, offering a collection of interactive experiences that retrace and interpret more than half a century of space exploration. Through these contents, the archive becomes a space for exploration and storytelling, where the memory of missions and space discoveries is reorganized and reinterpreted in a contemporary way, connecting the past, present, and future of aerospace research.
-    </div>
+<div class="page-container">
+<h1 class="page-title">About</h1>
 
-    <div class="about-text-grid">
-        <div class="about-col-1">
-            © 2026
-        </div>
-        <div class="about-col-2">
-            These projects have been developed by students from different schools, working with publicly available NASA data and materials online.
-        </div>
-        <div class="about-col-3">
-            Each contribution reflects a personal interpretation of how to celebrate NASA’s 70 years, combining research, selection, and visual storytelling to reimagine space exploration through interactive digital experiences and digital narratives. The <a href="https://ixd-supsi.github.io/n70api/data.json" target="_blank" class="hover-target">API</a> was used as the sole data source.
-        </div>
-    </div>
+<div class="layout-grid">
+<aside class="sidebar">
+<div class="about-col-1">
+NASA © 2026
+</div>
+</aside>
+
+<main class="main-content">
+<div class="intro-text">
+Founded in 1958, NASA is celebrating its 70th anniversary this year. This project aims to highlight the agency’s vast archive of data, images, and documents, curated specifically for the historic year of 2028, offering a collection of interactive experiences that retrace and interpret more than half a century of space exploration, spanning milestones from the first space missions to contemporary exploration efforts, across generations of innovation and discovery. Through these contents, the archive becomes a space for exploration and storytelling, where the memory of missions and space discoveries is reorganized and reinterpreted in a contemporary way, connecting the past, present, and future.
+</div>
+
+<div class="about-text-grid">
+<div class="about-col-2">
+Each contribution reflects a personal interpretation of how to celebrate NASA’s 70 years, combining research, selection, and visual storytelling to reimagine space exploration through interactive digital experiences and digital narratives. By transforming data, images, and documents into engaging visual formats, each project proposes a distinct way of navigating, understanding, and exploring the content.
+</div>
+<div class="about-col-3">
+These projects have been developed by students from different schools, working with publicly available NASA data and materials online. To ensure a centralized and consistent architecture, a dedicated <a href="https://ixd-supsi.github.io/n70api/data.json" target="_blank" class="hover-target">API</a> was used as the sole data source. The API structure itself was designed and developed by a university class. Consequently, all page elements such as titles, metadata, and media files are pulled from a single open-source <a href="https://github.com/ixd-supsi/n70api" target="_blank" class="hover-target">GitHub</a> repository.
+</div>
+</div>
 </main>
+</div>
+</div>
 
 <script>
-    const cursor = document.getElementById('cursor')
+const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
+const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
+const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
 
-    window.addEventListener('mousemove', (e) => {
-        if (cursor.style.opacity !== '1') cursor.style.opacity = '1'
-        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
-    })
-
-    document.querySelectorAll('.hover-target').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('expand')
-        })
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('expand')
-        })
-    })
-
-    window.addEventListener('dragstart', e => e.preventDefault())
+fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
+fontMedium.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 500 locale assente"))
+fontBold.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 600 locale assente"))
 </script>
 
 </body>
