@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N70 | NASA70</title>
+    <title>NASA 70</title>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
     <style>
-        :root { --bg: #ffffff }
+        :root { --bg: #f9f9f9 }
         :root { --text: #000000 }
         :root { --text-30: #b2b2b2 }
-        :root { --ui-font: 'NeueMontreal', sans-serif }
+        :root { --ui-font: 'Helvetica', 'HelveticaFallback', sans-serif }
         :root { --ease: cubic-bezier(0.23, 1, 0.32, 1) }
 
-        * { cursor: none !important }
         * { margin: 0 }
         * { padding: 0 }
         * { box-sizing: border-box }
@@ -33,95 +33,52 @@
         body { user-select: none }
         body { -webkit-font-smoothing: antialiased }
         body { color: var(--text) }
+        body { cursor: default }
 
         header { position: fixed }
         header { top: 0 }
         header { left: 0 }
         header { width: 100% }
-        header { padding: 20px 20px 40px 20px }
+        header { padding: 20px 20px 20px 20px }
         header { display: grid }
         header { grid-template-columns: 1fr auto 1fr }
-        header { align-items: flex-start }
+        header { align-items: center }
         header { z-index: 10000 }
-        header { background: transparent }
-        header { pointer-events: none }
-        header { mix-blend-mode: difference }
+        header { background: #000000 }
+        header { pointer-events: auto }
         
         .header-left { display: flex }
         .header-left { justify-content: flex-start }
-        .header-left { pointer-events: auto }
+        .header-left { align-items: center }
         
-        .site-title { font-size: 18px }
+        .site-title { font-size: 16px }
         .site-title { font-weight: 500 }
         .site-title { color: #ffffff }
         .site-title { letter-spacing: 0.01em }
         .site-title { cursor: pointer }
+        .site-title { line-height: 1.15 }
         
         .logo-container { display: flex }
         .logo-container { justify-content: center }
-        .logo-container { pointer-events: auto }
-        .logo-container { mix-blend-mode: normal }
         
         .logo-container img { height: 45px }
         .logo-container img { width: auto }
         .logo-container img { display: block }
+        .logo-container img { cursor: pointer }
         
         nav { display: flex }
         nav { justify-content: flex-end }
-        nav { gap: 20px }
-        nav { align-items: flex-start }
-        nav { pointer-events: auto }
+        nav { gap: 40px }
+        nav { align-items: center }
         
         nav a { text-decoration: none }
         nav a { color: #ffffff !important }
-        nav a { font-size: 18px }
+        nav a { font-size: 16px }
         nav a { font-weight: 500 }
         nav a { letter-spacing: 0.01em }
-        nav a { transition: opacity 0.3s var(--ease) }
+        nav a { transition: color 0.3s var(--ease) }
         nav a { line-height: 1 }
-        
-        nav a:hover { opacity: 0.6 }
-        nav a.active { opacity: 1 }
-
-        #cursor { position: fixed }
-        #cursor { top: 0 }
-        #cursor { left: 0 }
-        #cursor { pointer-events: none }
-        #cursor { z-index: 99999 }
-        #cursor { opacity: 0 }
-        #cursor { mix-blend-mode: difference }
-        #cursor { color: #ffffff }
-        
-        .cursor-dot { position: absolute }
-        .cursor-dot { top: 0 }
-        .cursor-dot { left: 0 }
-        .cursor-dot { width: 14px }
-        .cursor-dot { height: 14px }
-        .cursor-dot { background-color: #ffffff }
-        .cursor-dot { border-radius: 50% }
-        .cursor-dot { transform: translate(-50%, -50%) }
-        .cursor-dot { transition: width 0.25s var(--ease), height 0.25s var(--ease), background-color 0.3s var(--ease), opacity 0.3s var(--ease), transform 0.3s var(--ease) }
-        
-        #cursor.expand .cursor-dot { width: 35px }
-        #cursor.expand .cursor-dot { height: 35px }
-
-        .center-title { position: fixed }
-        .center-title { top: 50% }
-        .center-title { left: 50% }
-        .center-title { transform: translate(-50%, -50%) }
-        .center-title { text-align: center }
-        .center-title { z-index: 10 }
-        .center-title { pointer-events: none }
-        .center-title { width: 100% }
-        .center-title { mix-blend-mode: difference }
-        
-        .center-title h1 { font-family: var(--ui-font) }
-        .center-title h1 { font-size: 8vw }
-        .center-title h1 { font-weight: 500 }
-        .center-title h1 { color: #ffffff }
-        .center-title h1 { margin: 0 }
-        .center-title h1 { line-height: 0.95 }
-        .center-title h1 { letter-spacing: -0.02em }
+        nav a { cursor: pointer }
 
         #viewport { position: fixed }
         #viewport { top: 0 }
@@ -130,7 +87,6 @@
         #viewport { height: 100vh }
         #viewport { z-index: 1 }
         #viewport { overflow: hidden }
-        #viewport { pointer-events: auto }
         
         #canvas { position: absolute }
         #canvas { top: 0 }
@@ -141,31 +97,32 @@
 </head>
 <body>
 
-<div id="cursor">
-    <div class="cursor-dot"></div>
-</div>
-
 <header>
     <div class="header-left">
-        <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA70</span>
+        <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
     </div>
     <div class="logo-container">
         <img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
     </div>
     <nav>
-        <a href="index.html" class="hover-target active">Explore</a>
         <a href="projects.html" class="hover-target">Projects</a>
         <a href="about.html" class="hover-target">About</a>
     </nav>
 </header>
 
-<div class="center-title">
-    <h1>NASA’s 70th<br>Anniversary</h1>
-</div>
-
 <div id="viewport">
     <div id="canvas"></div>
 </div>
+
+<script>
+    const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
+    const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
+    const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
+
+    fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
+    fontMedium.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 500 locale assente"))
+    fontBold.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 600 locale assente"))
+</script>
 
 <script type="module">
     import * as THREE from 'https://cdn.skypack.dev/three@0.136.0'
@@ -187,55 +144,98 @@
 
     const fragmentShader = `
         uniform sampler2D tDiffuse ${s}
+        uniform vec3 uPickingColor ${s}
+        uniform float uIsPicking ${s}
         varying vec2 vUv ${s}
         void main() {
-            vec4 texColor = texture2D(tDiffuse, vUv) ${s}
-            gl_FragColor = vec4(texColor.rgb, 1.0) ${s}
+            if (uIsPicking > 0.5) {
+                gl_FragColor = vec4(uPickingColor, 1.0) ${s}
+            } else {
+                vec4 texColor = texture2D(tDiffuse, vUv) ${s}
+                gl_FragColor = vec4(texColor.rgb, 1.0) ${s}
+            }
+        }
+    `
+
+    const textVertexShader = `
+        varying vec2 vUv ${s}
+        void main() {
+            vUv = uv ${s}
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0) ${s}
+            
+            float dist = length(mvPosition.xy) ${s}
+            mvPosition.z += dist * dist * 0.015 ${s} 
+            
+            gl_Position = projectionMatrix * mvPosition ${s}
+        }
+    `
+
+    const textFragmentShader = `
+        uniform sampler2D tText ${s}
+        uniform vec2 uRepeat ${s}
+        uniform vec2 uGlobalOffset ${s}
+        uniform float uPlaneOffset ${s}
+        uniform vec3 uPickingColor ${s}
+        uniform float uIsPicking ${s}
+        varying vec2 vUv ${s}
+        void main() {
+            if (uIsPicking > 0.5) {
+                gl_FragColor = vec4(uPickingColor, 1.0) ${s}
+            } else {
+                vec2 finalUv = vec2(vUv.x * uRepeat.x + uPlaneOffset + uGlobalOffset.x, vUv.y * uRepeat.y + uGlobalOffset.y) ${s}
+                vec4 textColor = texture2D(tText, finalUv) ${s}
+                gl_FragColor = vec4(textColor.rgb, textColor.a) ${s}
+            }
         }
     `
 
     fetch('https://ixd-supsi.github.io/n70api/data.json')
         .then(res => res.json())
         .then(data => {
-            let images = []
-            const jsonStr = JSON.stringify(data)
+            let projects = []
             
-            const regexExt = /([^"\/]+_1\.(?:jpg|jpeg|png|webp|gif))/gi
-            let match = regexExt.exec(jsonStr)
-            
-            while (match !== null) {
-                if (!images.includes(match[1])) {
-                    images.push(match[1])
-                }
-                match = regexExt.exec(jsonStr)
-            }
-            
-            if (images.length === 0) {
-                const findIds = (obj) => {
-                    if (Array.isArray(obj)) {
-                        obj.forEach(findIds)
-                    } else if (obj !== null && typeof obj === 'object') {
-                        if (obj.id && typeof obj.id === 'string') {
-                            images.push(obj.id + '_1.jpg')
+            data.forEach(p => {
+                let imgFilename = 'placeholder_1.jpg'
+                
+                if (p.immagine) {
+                    if (Array.isArray(p.immagine)) {
+                        if (p.immagine.length > 0) {
+                            imgFilename = String(p.immagine[0])
                         }
-                        Object.values(obj).forEach(findIds)
+                    } else if (typeof p.immagine === 'string') {
+                        imgFilename = p.immagine
                     }
                 }
-                findIds(data)
-            }
+                
+                imgFilename = imgFilename.trim()
+                
+                const parts = imgFilename.split('/')
+                imgFilename = parts[parts.length - 1]
 
-            if (images.length === 0) {
-                images = ['placeholder_1.jpg']
+                if (imgFilename.includes('..._')) {
+                    imgFilename = 'placeholder_1.jpg'
+                }
+
+                projects.push({ 
+                    file: imgFilename, 
+                    url: p.url || '#'
+                })
+            })
+
+            if (projects.length === 0) {
+                projects = [{ file: 'placeholder_1.jpg', url: '#' }]
             }
             
-            initThree(images)
+            projects.sort(() => Math.random() - 0.5)
+            
+            initThree(projects)
         })
         .catch(err => {
-            console.error(err)
-            initThree(['placeholder_1.jpg'])
+            console.error('Errore nel recupero dati:', err)
+            initThree([{ file: 'placeholder_1.jpg', url: '#' }])
         })
 
-    function initThree(imageFiles) {
+    function initThree(projectData) {
         const scene = new THREE.Scene()
         
         scene.fog = new THREE.FogExp2(0xffffff, 0.015)
@@ -260,8 +260,8 @@
 
         const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 32, 32)
 
-        const cols = 8
-        const rowsCount = 9
+        const cols = 16
+        const rowsCount = 11
 
         const totalWidth = cols * (planeWidth + gap)
         const totalHeight = rowsCount * (planeHeight + gap)
@@ -273,25 +273,105 @@
         
         const baseUrl = 'https://raw.githubusercontent.com/ixd-supsi/n70api/main/immagini/'
         
-        const textures = imageFiles.map(file => {
-            const tex = textureLoader.load(baseUrl + file)
+        const textureDataList = projectData.map(proj => {
+            const tex = textureLoader.load(baseUrl + 'placeholder_1.jpg')
             tex.generateMipmaps = false 
             tex.minFilter = THREE.LinearFilter
             tex.magFilter = THREE.LinearFilter
-            return tex
+            
+            if (proj.file && !proj.file.includes('..._') && proj.file !== 'placeholder_1.jpg') {
+                const name = proj.file.substring(0, proj.file.lastIndexOf('.'))
+                
+                const exts = ['.jpg', '.JPG', '.png', '.PNG', '.jpeg']
+                const names = [name]
+                
+                if (name === 'perseverancerover_1') names.push('PerseveranceRover_1')
+                if (name === 'otherworlds_1') names.push('OtherWorlds_1', 'Other_Worlds_1')
+                if (name === 'projectmoonbound_1') names.push('ProjectMoonbound_1')
+                if (name === 'nebulavision_1') names.push('NebulaVision_1')
+                if (name === 'solarscale_1') names.push('SolarScale_1')
+                if (name === 'moonprint_1') names.push('MoonPrint_1')
+                if (name === 'eyesonearth_1') names.push('EyesOnEarth_1')
+                if (name === 'neoprotocol_1') names.push('NEOProtocol_1', 'NeoProtocol_1')
+                
+                const tryPaths = []
+                names.forEach(n => {
+                    exts.forEach(e => {
+                        tryPaths.push(baseUrl + n + e)
+                    })
+                })
+                
+                let attempt = 0
+                const loadNext = () => {
+                    if (attempt >= tryPaths.length) return
+                    const currentPath = tryPaths[attempt]
+                    attempt++
+                    
+                    const tempTex = textureLoader.load(
+                        currentPath, 
+                        () => {
+                            tex.image = tempTex.image
+                            tex.needsUpdate = true
+                        }, 
+                        undefined, 
+                        () => {
+                            loadNext()
+                        }
+                    )
+                }
+                loadNext()
+            }
+            
+            return { tex: tex, url: proj.url }
         })
+
+        const textStr = "NASA’S 70TH ANNIVERSARY   •   INTERACTIVE PROJECTS CELEBRATING OUR HISTORY   •   "
+        const tempCanvas = document.createElement('canvas')
+        const tempCtx = tempCanvas.getContext('2d')
+        tempCtx.font = '40px "Helvetica", "HelveticaFallback", sans-serif'
+        const textWidth = tempCtx.measureText(textStr).width
+
+        const textCanvas = document.createElement('canvas')
+        textCanvas.width = textWidth
+        textCanvas.height = 128
+        const ctx = textCanvas.getContext('2d')
+        ctx.font = '40px "Helvetica", "HelveticaFallback", sans-serif'
+        ctx.fillStyle = '#888888' 
+        ctx.textAlign = 'left'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(textStr, 0, 64)
+
+        const textTexture = new THREE.CanvasTexture(textCanvas)
+        textTexture.wrapS = THREE.RepeatWrapping
+        textTexture.wrapT = THREE.RepeatWrapping
+        textTexture.minFilter = THREE.LinearFilter
+
+        const planeAspect = (planeWidth + gap) / (gap * 0.5)
+        const canvasAspect = textWidth / 128
+        
+        const exactRepeatX = planeAspect / canvasAspect
+        let totalRepeatX = Math.round(exactRepeatX * cols)
+        if (totalRepeatX < 1) totalRepeatX = 1
+        const repeatX = totalRepeatX / cols
+        
+        const textGeometry = new THREE.PlaneGeometry(planeWidth + gap, gap * 0.5, 32, 4)
+        const textUniformsOffset = { value: new THREE.Vector2(0.0, 0.0) }
 
         let r = 0
         let meshIndex = 0
+        let nextId = 1
         
         while (r < rowsCount) {
             let c = 0
             while (c < cols) {
-                const currentTexture = textures[meshIndex % textures.length]
+                const currentData = textureDataList[meshIndex % textureDataList.length]
                 
+                const imageId = nextId++
                 const material = new THREE.ShaderMaterial({
                     uniforms: {
-                        tDiffuse: { value: currentTexture }
+                        tDiffuse: { value: currentData.tex },
+                        uPickingColor: { value: new THREE.Color(imageId) },
+                        uIsPicking: { value: 0.0 }
                     },
                     vertexShader: vertexShader,
                     fragmentShader: fragmentShader,
@@ -300,6 +380,10 @@
 
                 const mesh = new THREE.Mesh(geometry, material)
                 
+                mesh.frustumCulled = false 
+                mesh.userData.url = currentData.url
+                mesh.userData.id = imageId
+                
                 const xPos = (c * (planeWidth + gap)) - (totalWidth / 2) + ((planeWidth + gap) / 2)
                 const yPos = (r * (planeHeight + gap)) - (totalHeight / 2) + ((planeHeight + gap) / 2)
                 
@@ -307,6 +391,34 @@
                 
                 group.add(mesh)
                 planes.push(mesh)
+
+                const textId = nextId++
+                const meshTextMaterial = new THREE.ShaderMaterial({
+                    uniforms: {
+                        tText: { value: textTexture },
+                        uRepeat: { value: new THREE.Vector2(repeatX, 1.0) },
+                        uGlobalOffset: textUniformsOffset,
+                        uPlaneOffset: { value: c * repeatX },
+                        uPickingColor: { value: new THREE.Color(textId) },
+                        uIsPicking: { value: 0.0 }
+                    },
+                    vertexShader: textVertexShader,
+                    fragmentShader: textFragmentShader,
+                    transparent: true,
+                    side: THREE.DoubleSide
+                })
+
+                const textMesh = new THREE.Mesh(textGeometry, meshTextMaterial)
+                
+                textMesh.frustumCulled = false 
+                const textYPos = yPos - (planeHeight / 2) - (gap / 2)
+                textMesh.position.set(xPos, textYPos, 0)
+                
+                textMesh.userData.url = '#'
+                textMesh.userData.id = textId
+                
+                group.add(textMesh)
+                planes.push(textMesh)
                 
                 c++
                 meshIndex++
@@ -314,50 +426,116 @@
             r++
         }
 
-        let scrollY = 0
+        const pickingTexture = new THREE.WebGLRenderTarget(1, 1)
+        const pixelBuffer = new Uint8Array(4)
+
+        function getHoveredObject(clientX, clientY) {
+            planes.forEach(p => {
+                if (p.material.uniforms.uIsPicking) {
+                    p.material.uniforms.uIsPicking.value = 1.0
+                }
+            })
+            
+            const oldFog = scene.fog
+            scene.fog = null
+            
+            camera.setViewOffset(window.innerWidth, window.innerHeight, clientX, clientY, 1, 1)
+            
+            renderer.setRenderTarget(pickingTexture)
+            renderer.clear()
+            renderer.render(scene, camera)
+            
+            camera.clearViewOffset()
+            
+            try {
+                renderer.readRenderTargetPixels(pickingTexture, 0, 0, 1, 1, pixelBuffer)
+            } catch (e) {
+                pixelBuffer[0] = 0
+                pixelBuffer[1] = 0
+                pixelBuffer[2] = 0
+            }
+            
+            renderer.setRenderTarget(null)
+            
+            scene.fog = oldFog
+            
+            planes.forEach(p => {
+                if (p.material.uniforms.uIsPicking) {
+                    p.material.uniforms.uIsPicking.value = 0.0
+                }
+            })
+            
+            const id = (pixelBuffer[0] << 16) | (pixelBuffer[1] << 8) | pixelBuffer[2]
+            return planes.find(p => p.userData.id === id)
+        }
+
+        let scrollY = 1.8
         let scrollX = 0
-        let targetScrollY = 0
+        let targetScrollY = 1.8
         let targetScrollX = 0
+        
         let isDragging = false
+        let isClick = true
         let startDragX = 0
         let startDragY = 0
-        let hasMoved = false
-
-        const centerTitleEl = document.querySelector('.center-title')
 
         window.addEventListener('mousedown', (e) => {
+            if (e.target.closest('header')) return
+            
             isDragging = true
+            isClick = true
             startDragX = e.clientX
             startDragY = e.clientY
         })
 
         window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return
-            
-            if (!hasMoved) {
-                hasMoved = true
-                centerTitleEl.style.zIndex = '0'
+            if (isDragging) {
+                const deltaX = e.clientX - startDragX
+                const deltaY = e.clientY - startDragY
+                
+                if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                    isClick = false
+                }
+                
+                targetScrollX += deltaX * 0.05
+                targetScrollY -= deltaY * 0.05
+                
+                startDragX = e.clientX
+                startDragY = e.clientY
+            } else {
+                if (e.target.closest('header')) {
+                    if (e.target.closest('.hover-target')) {
+                        document.body.style.cursor = 'pointer'
+                    } else {
+                        document.body.style.cursor = 'default'
+                    }
+                } else {
+                    const hoveredObj = getHoveredObject(e.clientX, e.clientY)
+                    if (hoveredObj && hoveredObj.userData.url && hoveredObj.userData.url !== '#') {
+                        document.body.style.cursor = 'pointer'
+                    } else {
+                        document.body.style.cursor = 'default'
+                    }
+                }
             }
-
-            const deltaX = e.clientX - startDragX
-            const deltaY = e.clientY - startDragY
-            
-            targetScrollX += deltaX * 0.05
-            targetScrollY -= deltaY * 0.05
-            
-            startDragX = e.clientX
-            startDragY = e.clientY
         })
 
-        window.addEventListener('mouseup', () => { isDragging = false })
+        window.addEventListener('mouseup', (e) => { 
+            isDragging = false 
+            
+            if (e.target.closest('header')) return
+            
+            if (isClick) {
+                const clickedObj = getHoveredObject(e.clientX, e.clientY)
+                if (clickedObj && clickedObj.userData.url && clickedObj.userData.url !== '#') {
+                    window.open(clickedObj.userData.url, '_blank')
+                }
+            }
+        })
+        
         window.addEventListener('mouseleave', () => { isDragging = false })
 
         window.addEventListener('wheel', (e) => {
-            if (!hasMoved) {
-                hasMoved = true
-                centerTitleEl.style.zIndex = '0'
-            }
-
             targetScrollX -= e.deltaX * 0.02
             targetScrollY -= e.deltaY * 0.02
         })
@@ -365,8 +543,19 @@
         const limitX = totalWidth / 2
         const limitY = totalHeight / 2
 
+        const clock = new THREE.Clock()
+
         function animate() {
             requestAnimationFrame(animate)
+
+            const delta = clock.getDelta()
+            
+            const speed = 0.07 
+            textUniformsOffset.value.x -= speed * delta
+            
+            if (textUniformsOffset.value.x < 0) {
+                textUniformsOffset.value.x += 1.0
+            }
 
             scrollX += (targetScrollX - scrollX) * 0.05
             scrollY += (targetScrollY - scrollY) * 0.05
@@ -399,27 +588,6 @@
 </script>
 
 <script>
-    const cursor = document.getElementById('cursor')
-    const viewport = document.getElementById('viewport')
-
-    let isHoveringMenu = false
-
-    window.addEventListener('mousemove', (e) => {
-        if (cursor.style.opacity !== '1') cursor.style.opacity = '1'
-        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
-    })
-
-    document.querySelectorAll('.hover-target').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            isHoveringMenu = true
-            cursor.classList.add('expand')
-        })
-        el.addEventListener('mouseleave', () => {
-            isHoveringMenu = false
-            cursor.classList.remove('expand')
-        })
-    })
-
     window.addEventListener('dragstart', e => e.preventDefault())
 </script>
 </body>
