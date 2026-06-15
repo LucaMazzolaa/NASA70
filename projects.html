@@ -1,682 +1,919 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N70 | Archive Index</title>
-    <style>
-        :root { --bg: #ffffff }
-        :root { --text: #000000 }
-        :root { --text-50: #7c7c7c }
-        :root { --text-30: #b2b2b2 }
-        :root { --ui-font: 'SuisseIntl', sans-serif }
-        :root { --ease: cubic-bezier(0.19, 1, 0.22, 1) }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA 70 | Projects</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<style>
+:root { --bg: #f6f6f6 }
+:root { --text: #000000 }
+:root { --text-50: #7c7c7c }
+:root { --text-30: #b2b2b2 }
+:root { --ui-font: 'Helvetica', 'HelveticaFallback', sans-serif }
+:root { --ease: cubic-bezier(0.19, 1, 0.22, 1) }
 
-        * { margin: 0 }
-        * { padding: 0 }
-        * { box-sizing: border-box }
-        * { cursor: none !important }
+* { margin: 0 }
+* { padding: 0 }
+* { box-sizing: border-box }
 
-        html { -ms-overflow-style: none }
-        html { scrollbar-width: none }
-        html { overflow-x: hidden }
+html { -ms-overflow-style: none }
+html { scrollbar-width: none }
+html { overflow-x: hidden }
 
-        body { -ms-overflow-style: none }
-        body { scrollbar-width: none }
-        body { overflow-x: hidden }
-        body { background-color: var(--bg) }
-        body { font-family: var(--ui-font) }
-        body { color: var(--text) }
-        body { -webkit-font-smoothing: antialiased }
-        body { text-rendering: optimizeLegibility }
-        body { font-weight: 500 }
-        body { font-size: 18px }
-        body { line-height: 1.15 }
-        body { min-height: 100vh }
-        body { display: flex }
-        body { flex-direction: column }
+body { -ms-overflow-style: none }
+body { scrollbar-width: none }
+body { overflow-x: hidden }
+body { background-color: var(--bg) }
+body { font-family: var(--ui-font) }
+body { color: var(--text) }
+body { -webkit-font-smoothing: antialiased }
+body { text-rendering: optimizeLegibility }
+body { font-weight: 600 }
+body { font-size: 16px }
+body { line-height: 1.15 }
+body { min-height: 100vh }
+body { display: flex }
+body { flex-direction: column }
 
-        .icon { height: 13px }
-        .icon { width: auto }
-        .icon { display: block }
+.icon { height: 13px }
+.icon { width: auto }
+.icon { display: block }
 
-        header { position: fixed }
-        header { top: 0 }
-        header { left: 0 }
-        header { width: 100% }
-        header { padding: 20px 20px 40px 20px }
-        header { display: grid }
-        header { grid-template-columns: 1fr auto 1fr }
-        header { align-items: flex-start }
-        header { z-index: 1000 }
-        header { background: var(--bg) }
+header { position: fixed }
+header { top: 0 }
+header { left: 0 }
+header { width: 100% }
+header { padding: 20px 20px 20px 20px }
+header { display: grid }
+header { grid-template-columns: 1fr auto 1fr }
+header { align-items: center }
+header { z-index: 10000 }
+header { background: #000000 }
+header { pointer-events: auto }
+.header-left { display: flex }
+.header-left { justify-content: flex-start }
+.header-left { align-items: center }
+.site-title { font-size: 16px }
+.site-title { font-weight: 500 }
+.site-title { color: #ffffff }
+.site-title { letter-spacing: 0.01em }
+.site-title { cursor: pointer }
+.logo-container { display: flex }
+.logo-container { justify-content: center }
+.logo-container img { height: 45px }
+.logo-container img { width: auto }
+.logo-container img { display: block }
+.logo-container img { cursor: pointer }
+nav { display: flex }
+nav { justify-content: flex-end }
+nav { gap: 40px }
+nav { align-items: center }
+nav a { text-decoration: none }
+nav a { color: #ffffff !important }
+nav a { font-size: 16px }
+nav a { font-weight: 500 }
+nav a { letter-spacing: 0.01em }
+nav a { transition: color 0.3s var(--ease) }
+nav a { line-height: 1 }
+nav a { cursor: pointer }
 
-        .header-left { display: flex }
-        .header-left { justify-content: flex-start }
-        .header-left { pointer-events: auto }
+.layout-grid { display: flex }
+.layout-grid { flex-direction: row }
+.layout-grid { gap: 5% }
+.layout-grid { padding: 140px 20px 20px 20px }
+.layout-grid { flex-grow: 1 }
 
-        .site-title { font-size: 18px }
-        .site-title { font-weight: 500 }
-        .site-title { color: var(--text) }
-        .site-title { letter-spacing: 0.01em }
-        .site-title { cursor: pointer }
-        
-        .logo-container { display: flex }
-        .logo-container { justify-content: center }
-        .logo-container { pointer-events: auto }
+.sidebar { width: 18% }
+.sidebar { flex-shrink: 0 }
+.sidebar { display: flex }
+.sidebar { flex-direction: column }
 
-        .logo-container img { height: 45px }
-        .logo-container img { width: auto }
-        .logo-container img { display: block }
-        
-        nav { display: flex }
-        nav { justify-content: flex-end }
-        nav { gap: 20px }
-        nav { align-items: flex-start }
-        nav { pointer-events: auto }
-        
-        nav a { text-decoration: none }
-        nav a { color: var(--text-30) }
-        nav a { font-size: 18px }
-        nav a { font-weight: 500 }
-        nav a { letter-spacing: 0.01em }
-        nav a { transition: color 0.3s var(--ease) }
-        nav a { cursor: none }
-        nav a { line-height: 1 }
-        
-        nav a:hover { color: var(--text) }
-        nav a.active { color: var(--text) }
+.about-col-1 { padding-right: 20px }
+.about-col-1 { font-weight: 400 }
+.about-col-1 { margin-top: auto }
+.about-col-1 { opacity: 0 }
+.about-col-1 { transition: opacity 0.3s var(--ease) }
 
-        #controls-section { position: fixed }
-        #controls-section { top: 100px }
-        #controls-section { left: 0 }
-        #controls-section { width: 100% }
-        #controls-section { padding: 40px 20px 25px 20px }
-        #controls-section { margin-bottom: 0 }
-        #controls-section { display: grid }
-        #controls-section { grid-template-columns: 1fr auto 1fr }
-        #controls-section { align-items: baseline }
-        #controls-section { background-color: var(--bg) }
-        #controls-section { z-index: 990 }
+.about-col-1.visible { opacity: 1 }
 
-        .right-controls { display: flex }
-        .right-controls { justify-content: flex-end }
-        .right-controls { align-items: center }
-        .right-controls { gap: 30px }
-        
-        .search-container { display: flex }
-        .search-container { align-items: center }
-        .search-container { gap: 8px }
-        .search-container { border-bottom: 1px solid var(--text) }
-        .search-container { width: 220px }
-        .search-container { padding-bottom: 4px }
+.page-title { font-size: 60px }
+.page-title { font-weight: 500 }
+.page-title { color: var(--text) }
+.page-title { margin-bottom: 35px }
+.page-title { line-height: 1 }
+.page-title { letter-spacing: -0.02em }
 
-        .search-input { background: transparent }
-        .search-input { border: none }
-        .search-input { font-family: var(--ui-font) }
-        .search-input { font-size: 18px }
-        .search-input { font-weight: 500 }
-        .search-input { color: var(--text) }
-        .search-input { outline: none }
-        .search-input { padding: 0 }
-        .search-input { width: 100% }
-        .search-input { transition: color 0.3s var(--ease) }
-        
-        .search-input::placeholder { color: var(--text) }
-        .search-input::placeholder { transition: color 0.3s var(--ease) }
-        .search-input::placeholder { opacity: 1 }
-        
-        .search-input:focus::placeholder { color: var(--text-30) }
+.hidden-title { visibility: hidden }
+.hidden-title { pointer-events: none }
 
-        .sort-wrapper { display: flex }
-        .sort-wrapper { flex-direction: row }
-        .sort-wrapper { align-items: baseline }
-        
-        .sort-dropdown-container { display: flex }
-        .sort-dropdown-container { align-items: baseline }
-        .sort-dropdown-container { position: relative }
+.tags-section { display: flex }
+.tags-section { flex-direction: column }
+.tags-section { gap: 12px }
+.tags-section { margin-top: 0 }
 
-        .buttons-container { display: flex }
-        .buttons-container { flex-direction: column }
-        .buttons-container { gap: 12px }
-        .buttons-container { width: auto }
+.tags-header { display: flex }
+.tags-header { justify-content: space-between }
+.tags-header { align-items: center }
+.tags-header { height: 34px }
 
-        .tag-row { display: flex }
-        .tag-row { flex-wrap: nowrap }
-        .tag-row { white-space: nowrap }
-        .tag-row { gap: 15px }
+.tags-title { font-weight: 500 }
+.tags-title { font-size: 16px }
+.tags-title { color: var(--text-30) }
 
-        .action-btn { background: transparent }
-        .action-btn { border: none }
-        .action-btn { font-family: var(--ui-font) }
-        .action-btn { font-size: 18px }
-        .action-btn { font-weight: 500 }
-        .action-btn { color: var(--text-30) }
-        .action-btn { transition: color 0.3s var(--ease) }
-        .action-btn { letter-spacing: 0.01em }
-        .action-btn { position: relative }
-        .action-btn { cursor: none }
-        .action-btn { padding: 0 }
-        .action-btn { display: flex }
-        .action-btn { align-items: center }
-        .action-btn { gap: 8px }
+.tags-list { display: flex }
+.tags-list { flex-direction: row }
+.tags-list { flex-wrap: wrap }
+.tags-list { gap: 6px }
+.tags-list { align-items: flex-start }
+.tags-list { width: 100% }
 
-        .action-btn:hover { color: var(--text) }
-        .action-btn.active { color: var(--text) }
+.action-btn { background: transparent }
+.action-btn { border: none }
+.action-btn { font-family: var(--ui-font) }
+.action-btn { font-size: 16px }
+.action-btn { font-weight: 500 }
+.action-btn { color: var(--text-30) }
+.action-btn { transition: color 0.3s var(--ease) }
+.action-btn { letter-spacing: 0.01em }
+.action-btn { position: relative }
+.action-btn { padding: 0 }
+.action-btn { display: flex }
+.action-btn { align-items: center }
+.action-btn { gap: 8px }
+.action-btn { cursor: pointer }
 
-        .custom-dropdown { position: relative }
-        .dropdown-toggle { color: var(--text) }
+.action-btn:hover { color: var(--text) }
+.action-btn.active { color: var(--text) }
 
-        .dropdown-menu { position: absolute }
-        .dropdown-menu { top: 100% }
-        .dropdown-menu { right: 0 }
-        .dropdown-menu { padding-top: 10px }
-        .dropdown-menu { display: flex }
-        .dropdown-menu { flex-direction: column }
-        .dropdown-menu { align-items: flex-end }
-        .dropdown-menu { gap: 10px }
-        .dropdown-menu { opacity: 0 }
-        .dropdown-menu { pointer-events: none }
-        .dropdown-menu { transform: translateY(-5px) }
-        .dropdown-menu { transition: opacity 0.3s var(--ease), transform 0.3s var(--ease) }
-        .dropdown-menu { z-index: 100 }
-        .dropdown-menu { background: var(--bg) }
-        .dropdown-menu { padding-bottom: 0 }
+#reset-tags-btn { color: #D83933 }
+#reset-tags-btn { font-weight: 400 }
 
-        .dropdown-menu.show { opacity: 1 }
-        .dropdown-menu.show { pointer-events: auto }
-        .dropdown-menu.show { transform: translateY(0) }
+.filter-btn { border: 1px solid #D83933 }
+.filter-btn { padding: 4px 8px }
+.filter-btn { color: #D83933 }
+.filter-btn { background: transparent }
+.filter-btn { font-family: var(--ui-font) }
+.filter-btn { font-size: 12px }
+.filter-btn { font-weight: 500 }
+.filter-btn { transition: all 0.3s var(--ease) }
+.filter-btn { width: auto }
+.filter-btn { letter-spacing: 0.02em }
 
-        .dropdown-item { background: transparent }
-        .dropdown-item { border: none }
-        .dropdown-item { font-family: var(--ui-font) }
-        .dropdown-item { font-size: 18px }
-        .dropdown-item { font-weight: 500 }
-        .dropdown-item { color: var(--text-30) }
-        .dropdown-item { transition: color 0.3s var(--ease) }
-        .dropdown-item { letter-spacing: 0.01em }
-        .dropdown-item { white-space: nowrap }
-        .dropdown-item { cursor: none }
-        
-        .dropdown-item:hover { color: var(--text) }
-        .dropdown-item.active { color: var(--text) }
+.filter-btn:hover { background: #D83933 }
+.filter-btn:hover { color: #ffffff }
+.filter-btn.active { background: #D83933 }
+.filter-btn.active { border-color: #D83933 }
+.filter-btn.active { color: #ffffff }
 
-        #pagination-controls { padding: 40px 20px 20px 20px }
-        #pagination-controls { display: flex }
-        #pagination-controls { align-items: center }
-        #pagination-controls { gap: 20px }
-        #pagination-controls { font-size: 18px }
-        #pagination-controls { color: var(--text) }
-        #pagination-controls { margin-top: auto }
-        
-        #pagination-controls .nav-btn { color: var(--text) }
-        #pagination-controls .nav-btn { cursor: none !important }
-        
-        #pagination-controls .nav-btn:disabled { color: var(--text-30) }
-        #pagination-controls .nav-btn:disabled { cursor: none !important }
-        
-        #current-page-num { color: var(--text) }
-        #total-pages-display { color: var(--text-30) }
+.main-content { flex-grow: 1 }
+.main-content { display: flex }
+.main-content { flex-direction: column }
+.main-content { padding-top: 0 }
 
-        #cursor { position: fixed }
-        #cursor { top: 0 }
-        #cursor { left: 0 }
-        #cursor { pointer-events: none }
-        #cursor { z-index: 99999 }
-        #cursor { transform: translate(0,0) }
-        #cursor { mix-blend-mode: difference }
-        #cursor { color: #ffffff }
-        
-        .cursor-dot { width: 14px }
-        .cursor-dot { height: 14px }
-        .cursor-dot { background-color: #ffffff }
-        .cursor-dot { border-radius: 50% }
-        .cursor-dot { position: absolute }
-        .cursor-dot { top: 0 }
-        .cursor-dot { left: 0 }
-        .cursor-dot { transform: translate(-50%, -50%) }
-        .cursor-dot { transition: width 0.25s var(--ease), height 0.25s var(--ease), opacity 0.3s var(--ease) }
+.main-header-row { display: flex }
+.main-header-row { justify-content: space-between }
+.main-header-row { align-items: center }
+.main-header-row { margin-bottom: 12px }
+.main-header-row { height: 34px }
 
-        #cursor.expand .cursor-dot { width: 35px }
-        #cursor.expand .cursor-dot { height: 35px }
-        
-        #cursor.project-hover .cursor-dot { opacity: 0 }
+#results-count { font-size: 16px }
+#results-count { font-weight: 500 }
+#results-count { color: var(--text-30) }
 
-        .cursor-label { position: absolute }
-        .cursor-label { top: 0 }
-        .cursor-label { left: 0 }
-        .cursor-label { transform: translate(-50%, -50%) scale(0.8) }
-        .cursor-label { display: flex }
-        .cursor-label { align-items: center }
-        .cursor-label { gap: 10px }
-        .cursor-label { opacity: 0 }
-        .cursor-label { transition: opacity 0.3s var(--ease), transform 0.3s var(--ease) }
-        .cursor-label { white-space: nowrap }
-        .cursor-label { font-family: var(--ui-font) }
-        .cursor-label { font-size: 20px }
+.search-sort-wrapper { display: flex }
+.search-sort-wrapper { gap: 12px }
+.search-sort-wrapper { align-items: stretch }
 
-        #cursor.project-hover .cursor-label { opacity: 1 }
-        #cursor.project-hover .cursor-label { transform: translate(-50%, -50%) scale(1) }
+.sort-only-btn { border: 1px solid var(--text) }
+.sort-only-btn { padding: 6px 12px }
+.sort-only-btn { display: flex }
+.sort-only-btn { align-items: center }
+.sort-only-btn { justify-content: center }
+.sort-only-btn { color: var(--text) }
 
-        .cursor-label svg { width: 26px }
-        .cursor-label svg { height: 24px }
-        .cursor-label svg { transition: transform 0.3s var(--ease) }
-        
-        #cursor.project-hover .cursor-label svg { transform: translateX(5px) }
+.search-container { display: flex }
+.search-container { align-items: center }
+.search-container { gap: 8px }
+.search-container { border: 1px solid var(--text) }
+.search-container { width: 220px }
+.search-container { padding: 6px 12px }
 
-        #index-wrapper { padding: 230px 20px 20px 20px }
-        #index-wrapper { max-width: 100% }
-        #index-wrapper { transition: opacity 0.3s ease }
-        #index-wrapper { flex-grow: 1 }
-        
-        #index-wrapper.fading { opacity: 0 }
+.search-input { background: transparent }
+.search-input { border: none }
+.search-input { font-family: var(--ui-font) }
+.search-input { font-size: 16px }
+.search-input { font-weight: 500 }
+.search-input { color: var(--text) }
+.search-input { outline: none }
+.search-input { padding: 0 }
+.search-input { width: 100% }
+.search-input { transition: color 0.3s var(--ease) }
+.search-input { cursor: text }
+.search-input { line-height: 1 }
+.search-input { position: relative }
+.search-input { top: 1px }
 
-        .project-row { border: none }
-        .project-row { width: 100% }
-        .project-row { color: var(--text) }
-        .project-row { transition: color 0.3s var(--ease) }
-        .project-row { cursor: pointer }
-        
-        .project-row:hover { color: var(--text) }
+.search-input::placeholder { color: var(--text) }
+.search-input::placeholder { transition: color 0.3s var(--ease) }
+.search-input::placeholder { opacity: 1 }
+.search-input:focus::placeholder { color: transparent }
 
-        .row-main { display: grid }
-        .row-main { grid-template-columns: 1.5fr 2fr 4.5fr 1fr }
-        .row-main { padding: 5px 0 }
-        .row-main { font-size: 18px }
-        .row-main { font-weight: 500 }
-        .row-main { align-items: baseline }
-        
-        .col-author { color: inherit }
-        .col-author { padding-left: 20px }
-        
-        .col-cat { color: inherit }
-        
-        .col-date { text-align: right }
+.clear-icon { cursor: pointer }
+.clear-icon { display: none }
+.clear-icon { height: 10px }
+.clear-icon { position: relative }
+.clear-icon { top: 1px }
+.clear-icon.visible { display: block }
 
-        .row-details { display: grid }
-        .row-details { grid-template-columns: 1fr 2.5fr 4.5fr 1fr }
-        .row-details { opacity: 1 }
-        .row-details { padding-bottom: 30px }
+.custom-dropdown { position: relative }
+.custom-dropdown { flex-shrink: 0 }
+.custom-dropdown { display: flex }
 
-        .inner-left { grid-column: 1 / 3 }
-        .inner-left { padding-right: 20px }
-        
-        .project-img { width: 100% }
-        .project-img { aspect-ratio: 16 / 9 }
-        .project-img { display: block }
-        .project-img { background-color: #e0e0e0 }
-        .project-img { object-fit: cover }
-        
-        .inner-right { grid-column: 3 / 4 }
-        .inner-right { padding-right: 15px }
-        
-        .project-desc { font-size: 18px }
-        .project-desc { font-weight: 500 }
-        .project-desc { line-height: 1.15 }
-    </style>
+.dropdown-menu { position: absolute }
+.dropdown-menu { top: calc(100% + 5px) }
+.dropdown-menu { left: 0 }
+.dropdown-menu { padding: 10px }
+.dropdown-menu { display: flex }
+.dropdown-menu { flex-direction: column }
+.dropdown-menu { align-items: flex-start }
+.dropdown-menu { gap: 10px }
+.dropdown-menu { opacity: 0 }
+.dropdown-menu { pointer-events: none }
+.dropdown-menu { transform: translateY(-5px) }
+.dropdown-menu { transition: opacity 0.3s var(--ease), transform 0.3s var(--ease) }
+.dropdown-menu { z-index: 100 }
+.dropdown-menu { background: var(--bg) }
+.dropdown-menu { border: 1px solid var(--text) }
+
+.dropdown-menu.show { opacity: 1 }
+.dropdown-menu.show { pointer-events: auto }
+.dropdown-menu.show { transform: translateY(0) }
+
+.dropdown-item { background: transparent }
+.dropdown-item { border: none }
+.dropdown-item { font-family: var(--ui-font) }
+.dropdown-item { font-size: 16px }
+.dropdown-item { font-weight: 500 }
+.dropdown-item { color: var(--text-30) }
+.dropdown-item { transition: color 0.3s var(--ease) }
+.dropdown-item { white-space: nowrap }
+.dropdown-item { cursor: pointer }
+.dropdown-item { text-align: left }
+.dropdown-item:hover { color: var(--text) }
+.dropdown-item.active { color: var(--text) }
+
+#index-wrapper { display: flex }
+#index-wrapper { flex-direction: column }
+#index-wrapper { width: 100% }
+#index-wrapper { transition: opacity 0.3s ease }
+#index-wrapper.fading { opacity: 0 }
+
+.project-row { display: grid }
+.project-row { grid-template-columns: 12% 43% 15% 10% 8% }
+.project-row { gap: 3% }
+.project-row { align-items: start }
+.project-row { padding: 12px 0 35px 0 }
+.project-row { border-top: 1px solid var(--text) }
+.project-row { color: var(--text) }
+.project-row { text-decoration: none }
+.project-row { font-weight: 600 }
+
+.col-img-wrapper { width: 100% }
+.col-img-wrapper { aspect-ratio: 16 / 9 }
+.col-img-wrapper { position: relative }
+.col-img-wrapper { background-color: var(--text-30) }
+.col-img-wrapper { margin-top: 3px }
+
+.project-img { width: 100% }
+.project-img { height: 100% }
+.project-img { object-fit: cover }
+.project-img { display: block }
+
+.img-placeholder { width: 100% }
+.img-placeholder { height: 100% }
+.img-placeholder { background-color: var(--text-30) }
+.img-placeholder { position: absolute }
+.img-placeholder { top: 0 }
+.img-placeholder { left: 0 }
+
+.img-placeholder svg { width: 100% }
+.img-placeholder svg { height: 100% }
+.img-placeholder svg { display: block }
+
+.col-desc { font-size: 16px }
+.col-desc { color: var(--text) }
+.col-desc { line-height: 1.2 }
+
+.col-title { font-size: 16px }
+.col-title { font-weight: 600 }
+.col-title { line-height: 1.2 }
+.col-title { text-align: left }
+.col-title { margin-bottom: 12px }
+
+.col-desc-text { font-size: 16px }
+.col-desc-text { font-weight: 500 }
+.col-desc-text { line-height: 1.3 }
+
+.col-author { font-size: 16px }
+.col-author { font-weight: 600 }
+.col-author { line-height: 1.2 }
+.col-author { white-space: nowrap }
+.col-author { text-align: left }
+
+.col-author .author-by { font-weight: 600 }
+
+.row-tags-container { display: flex }
+.row-tags-container { flex-wrap: wrap }
+.row-tags-container { gap: 6px }
+.row-tags-container { margin-top: 40px }
+
+.project-tag { border: 1px solid #D83933 }
+.project-tag { padding: 4px 8px }
+.project-tag { color: #D83933 }
+.project-tag { background: transparent }
+.project-tag { font-family: var(--ui-font) }
+.project-tag { font-size: 12px }
+.project-tag { font-weight: 500 }
+.project-tag { display: inline-block }
+.project-tag { letter-spacing: 0.02em }
+.project-tag { transition: all 0.3s var(--ease) }
+.project-tag { cursor: pointer }
+
+.project-tag:hover { background: #D83933 }
+.project-tag:hover { color: #ffffff }
+.project-tag.active { background: #D83933 }
+.project-tag.active { color: #ffffff }
+
+.col-date { font-size: 16px }
+.col-date { color: var(--text) }
+.col-date { line-height: 1.2 }
+.col-date { text-align: left }
+.col-date { font-weight: 600 }
+
+.col-view { display: flex }
+.col-view { align-items: center }
+.col-view { gap: 8px }
+.col-view { line-height: 1.2 }
+.col-view { color: #D83933 }
+.col-view { font-weight: 600 }
+.col-view { cursor: pointer }
+.view-arrow { height: 12px }
+.view-arrow { width: auto }
+.view-arrow { display: block }
+.view-arrow { filter: invert(26%) sepia(74%) saturate(4157%) hue-rotate(347deg) brightness(92%) contrast(87%) }
+
+#pagination-controls { padding-top: 40px }
+#pagination-controls { display: flex }
+#pagination-controls { align-items: center }
+#pagination-controls { gap: 20px }
+#pagination-controls { font-size: 16px }
+#pagination-controls { font-weight: 400 }
+#pagination-controls { color: var(--text) }
+#pagination-controls .nav-btn { color: var(--text) }
+#pagination-controls .nav-btn:disabled { color: var(--text-30) }
+#pagination-controls .nav-btn:disabled { cursor: default }
+#current-page-num { color: var(--text) }
+#total-pages-display { color: var(--text) }
+
+.no-results-msg { padding-top: 0 }
+.no-results-msg { color: var(--text) }
+.no-results-msg { font-weight: 500 }
+.no-results-msg { margin-top: -2px }
+.no-results-msg { line-height: 1 }
+
+.back-to-top-btn { position: fixed }
+.back-to-top-btn { bottom: 40px }
+.back-to-top-btn { right: 40px }
+.back-to-top-btn { width: 44px }
+.back-to-top-btn { height: 44px }
+.back-to-top-btn { background: var(--bg) }
+.back-to-top-btn { border: 1px solid var(--text) }
+.back-to-top-btn { display: flex }
+.back-to-top-btn { justify-content: center }
+.back-to-top-btn { align-items: center }
+.back-to-top-btn { cursor: pointer }
+.back-to-top-btn { opacity: 0 }
+.back-to-top-btn { pointer-events: none }
+.back-to-top-btn { transition: opacity 0.3s var(--ease) }
+.back-to-top-btn { z-index: 10000 }
+.back-to-top-btn.visible { opacity: 1 }
+.back-to-top-btn.visible { pointer-events: auto }
+
+.up-arrow { height: 14px }
+.up-arrow { width: auto }
+.up-arrow { transform: rotate(-90deg) }
+
+@media (min-width: 1450px) {
+.project-row { grid-template-columns: 160px 3.5fr 1.5fr 1fr 70px }
+.project-row { gap: 30px }
+}
+
+@media (max-width: 1350px) {
+.layout-grid { flex-direction: column }
+.layout-grid { gap: 40px }
+.sidebar { width: 100% }
+.about-col-1 { padding-right: 0 }
+.about-col-1 { margin-top: 40px }
+.hidden-title { display: none }
+.project-row { position: relative }
+.project-row { display: grid }
+.project-row { grid-template-columns: 22% max-content 1fr }
+.project-row { gap: 0 4% }
+.project-row { padding-right: 70px }
+.col-img-wrapper { grid-column: 1 / 2 }
+.col-img-wrapper { grid-row: 1 / 3 }
+.col-desc { grid-column: 2 / 4 }
+.col-desc { grid-row: 1 / 2 }
+.col-desc { padding-right: 0 }
+.col-author { grid-column: 2 / 3 }
+.col-author { grid-row: 2 / 3 }
+.col-author { padding-top: 16px }
+.col-author { padding-right: 24px }
+.col-date { grid-column: 3 / 4 }
+.col-date { grid-row: 2 / 3 }
+.col-date { padding-top: 16px }
+.col-view { position: absolute }
+.col-view { top: 12px }
+.col-view { right: 0 }
+}
+
+@media (max-width: 950px) {
+.layout-grid { gap: 40px }
+.project-row { grid-template-columns: 25% 40% 1fr }
+.project-row { gap: 4% }
+.project-row { padding-right: 60px }
+.col-img-wrapper { grid-column: 1 / 2 }
+.col-img-wrapper { grid-row: 1 / 3 }
+.col-desc { grid-column: 2 / 4 }
+.col-desc { grid-row: 1 / 2 }
+.col-author { grid-column: 2 / 3 }
+.col-author { grid-row: 2 / 3 }
+.col-author { margin-top: 15px }
+.col-author { padding-top: 0 }
+.col-date { grid-column: 3 / 4 }
+.col-date { grid-row: 2 / 3 }
+.col-date { margin-top: 15px }
+.col-date { padding-top: 0 }
+}
+
+@media (max-width: 650px) {
+.layout-grid { gap: 40px }
+
+.project-row { display: flex }
+.project-row { flex-wrap: wrap }
+.project-row { align-items: center }
+.project-row { position: static }
+.project-row { padding-right: 0 }
+
+.col-img-wrapper { width: 100% }
+.col-img-wrapper { margin-bottom: 12px }
+.col-img-wrapper { margin-top: 0 }
+
+.col-desc { width: 100% }
+.col-desc { margin-bottom: 35px }
+
+.col-author { width: auto }
+.col-author { margin-top: 0 }
+.col-author { margin-right: 20px }
+
+.col-date { width: auto }
+.col-date { margin-top: 0 }
+.col-date { margin-right: auto }
+
+.col-view { position: static }
+.col-view { margin-top: 0 }
+.col-view { width: auto }
+.col-view { justify-content: flex-end }
+
+.main-header-row { flex-direction: column }
+.main-header-row { align-items: flex-start }
+.main-header-row { height: auto }
+.main-header-row { gap: 15px }
+
+.search-sort-wrapper { width: 100% }
+.search-sort-wrapper { flex-wrap: wrap }
+
+.search-container { flex-grow: 1 }
+.search-container { width: auto }
+
+.back-to-top-btn { bottom: 20px }
+.back-to-top-btn { right: 20px }
+}
+</style>
 </head>
 <body>
 
-<div id="cursor">
-    <div class="cursor-dot"></div>
-    <div class="cursor-label">
-        <span id="cursor-text">Project Title</span>
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 12H20M20 12L13 5M20 12L13 19" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"></path>
-        </svg>
-    </div>
-</div>
-
 <header>
-    <div class="header-left">
-        <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA70</span>
-    </div>
-    <div class="logo-container">
-        <img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
-    </div>
-    <nav>
-        <a href="index.html" class="hover-target">Explore</a>
-        <a href="projects.html" class="hover-target active">Projects</a>
-        <a href="about.html" class="hover-target">About</a>
-    </nav>
+<div class="header-left">
+<span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
+</div>
+<div class="logo-container">
+<img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
+</div>
+<nav>
+<a href="projects.html" class="hover-target">Projects</a>
+<a href="about.html" class="hover-target">About</a>
+</nav>
 </header>
 
-<section id="controls-section">
-    <div class="buttons-container fade-in-1" id="tags-container">
-    </div>
-    
-    <div></div>
-    
-    <div class="right-controls fade-in-1">
-        <div class="sort-wrapper">
-            <div class="sort-dropdown-container">
-                <div class="custom-dropdown">
-                    <button class="action-btn dropdown-toggle hover-target" id="sort-toggle">
-                        <img src="assets/sort.svg" alt="Sort" class="icon">
-                        Sort
-                    </button>
-                    <div class="dropdown-menu" id="sort-menu">
-                        <button class="dropdown-item sort-item hover-target active" data-key="title" data-dir="1">Title (A-Z)</button>
-                        <button class="dropdown-item sort-item hover-target" data-key="title" data-dir="-1">Title (Z-A)</button>
-                        <button class="dropdown-item sort-item hover-target" data-key="author" data-dir="1">Author (A-Z)</button>
-                        <button class="dropdown-item sort-item hover-target" data-key="author" data-dir="-1">Author (Z-A)</button>
-                        <button class="dropdown-item sort-item hover-target" data-key="dateScore" data-dir="1">Date (Ascending)</button>
-                        <button class="dropdown-item sort-item hover-target" data-key="dateScore" data-dir="-1">Date (Descending)</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="layout-grid">
+<aside class="sidebar">
+<h1 class="page-title">Projects</h1>
+<div class="tags-section">
+<div class="tags-header">
+<span class="tags-title">Tags</span>
+<button class="action-btn" id="reset-tags-btn">Reset</button>
+</div>
+<div id="tags-container" class="tags-list"></div>
+</div>
+<div class="about-col-1">
+NASA © 2026
+</div>
+</aside>
 
-        <div class="search-container">
-            <img src="assets/search.svg" alt="Search" class="icon">
-            <input type="text" id="search-input" class="search-input hover-target" placeholder="Search" autocomplete="off" spellcheck="false">
-        </div>
-    </div>
-</section>
-
-<main id="index-wrapper" class="fade-in-2"></main>
-
-<div id="pagination-controls" class="fade-in-2">
-    <button class="action-btn nav-btn hover-target" id="prev-btn">Previous</button>
-    <span id="page-display"><span id="current-page-num">1</span><span id="total-pages-display"> / 1</span></span>
-    <button class="action-btn nav-btn hover-target" id="next-btn">Next</button>
+<main class="main-content">
+<h1 class="page-title hidden-title">Projects</h1>
+<div class="main-header-row">
+<span id="results-count">0 results found</span>
+<div class="search-sort-wrapper">
+<div class="custom-dropdown">
+<button class="action-btn dropdown-toggle sort-only-btn" id="sort-toggle">
+<img src="assets/sort.svg" alt="Sort" class="icon">
+</button>
+<div class="dropdown-menu" id="sort-menu">
+<button class="dropdown-item sort-item active" data-key="views" data-dir="0">Random</button>
+<button class="dropdown-item sort-item" data-key="views" data-dir="-1">Most viewed</button>
+<button class="dropdown-item sort-item" data-key="views" data-dir="1">Least viewed</button>
+<button class="dropdown-item sort-item" data-key="title" data-dir="1">Title (A-Z)</button>
+<button class="dropdown-item sort-item" data-key="title" data-dir="-1">Title (Z-A)</button>
+<button class="dropdown-item sort-item" data-key="author" data-dir="1">Author (A-Z)</button>
+<button class="dropdown-item sort-item" data-key="author" data-dir="-1">Author (Z-A)</button>
+<button class="dropdown-item sort-item" data-key="dateScore" data-dir="1">Date (Ascending)</button>
+<button class="dropdown-item sort-item" data-key="dateScore" data-dir="-1">Date (Descending)</button>
+</div>
+</div>
+<div class="search-container">
+<img src="assets/search.svg" alt="Search" class="icon">
+<input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off" spellcheck="false">
+<img src="assets/delete.svg" alt="Clear search" class="icon clear-icon" id="clear-search-btn">
+</div>
+</div>
 </div>
 
+<div id="index-wrapper"></div>
+
+<div id="pagination-controls">
+<button class="action-btn nav-btn" id="prev-btn" disabled>Previous</button>
+<span id="page-display"><span id="current-page-num">1</span><span id="total-pages-display">/1</span></span>
+<button class="action-btn nav-btn" id="next-btn" disabled>Next</button>
+</div>
+</main>
+</div>
+
+<button id="back-to-top" class="back-to-top-btn">
+<img src="assets/arrow.svg" alt="Torna in cima" class="up-arrow">
+</button>
+
 <script>
-    const wrapper = document.getElementById('index-wrapper')
-    const cursor = document.getElementById('cursor')
-    const cursorText = document.getElementById('cursor-text')
-    const tagsContainer = document.getElementById('tags-container')
-    const searchInput = document.getElementById('search-input')
-    const sortToggle = document.getElementById('sort-toggle')
-    const sortMenu = document.getElementById('sort-menu')
-    
-    const prevBtn = document.getElementById('prev-btn')
-    const nextBtn = document.getElementById('next-btn')
-    const currentPageNum = document.getElementById('current-page-num')
-    const totalPagesDisplay = document.getElementById('total-pages-display')
-    
-    let allProjectsData = []
-    let currentProjectsData = []
-    let currentSortKey = 'dateScore'
-    let currentSortDir = 1
-    let activeTags = new Set()
-    let searchQuery = ""
-    
-    let currentPage = 1
-    const itemsPerPage = 10
+const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
+const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
+const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
 
-    window.addEventListener('mousemove', (e) => {
-        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`
-    })
+fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
+fontMedium.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 500 locale assente"))
+fontBold.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 600 locale assente"))
 
-    function attachCursorEvents() {
-        document.querySelectorAll('.hover-target:not(.project-row)').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('expand'))
-            el.addEventListener('mouseleave', () => cursor.classList.remove('expand'))
-        })
-    }
+const wrapper = document.getElementById('index-wrapper')
+const tagsContainer = document.getElementById('tags-container')
+const searchInput = document.getElementById('search-input')
+const clearSearchBtn = document.getElementById('clear-search-btn')
+const resetTagsBtn = document.getElementById('reset-tags-btn')
+const sortToggle = document.getElementById('sort-toggle')
+const sortMenu = document.getElementById('sort-menu')
+const resultsCount = document.getElementById('results-count')
+const prevBtn = document.getElementById('prev-btn')
+const nextBtn = document.getElementById('next-btn')
+const pageDisplay = document.getElementById('page-display')
+const currentPageNum = document.getElementById('current-page-num')
+const totalPagesDisplay = document.getElementById('total-pages-display')
+const paginationControls = document.getElementById('pagination-controls')
+const backToTopBtn = document.getElementById('back-to-top')
+let allProjectsData = []
+let currentProjectsData = []
+let currentSortKey = 'views'
+let currentSortDir = 0
+let activeTags = new Set()
+let searchQuery = ""
 
-    searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value.toLowerCase().trim()
-        currentPage = 1
-        executeFilter(true)
-    })
+window.handleImgError = function(img) {
+const container = img.parentElement
+if (container) {
+container.innerHTML = `<div class="img-placeholder"><svg viewBox="0 0 160 90" preserveAspectRatio="none"><line x1="0" y1="0" x2="160" y2="90" stroke="#000000" stroke-width="1.5"/><line x1="160" y1="0" x2="0" y2="90" stroke="#000000" stroke-width="1.5"/></svg></div>`
+}
+}
 
-    sortToggle.addEventListener('click', (e) => {
-        e.stopPropagation()
-        sortMenu.classList.toggle('show')
-    })
+searchInput.addEventListener('input', (e) => {
+searchQuery = e.target.value.toLowerCase().trim()
+if (e.target.value.length > 0) {
+clearSearchBtn.classList.add('visible')
+} else {
+clearSearchBtn.classList.remove('visible')
+}
+executeFilter(true)
+})
 
-    document.addEventListener('click', () => { 
-        sortMenu.classList.remove('show') 
-    })
+clearSearchBtn.addEventListener('click', () => {
+searchInput.value = ''
+searchQuery = ''
+clearSearchBtn.classList.remove('visible')
+executeFilter(true)
+searchInput.focus()
+})
 
-    document.querySelectorAll('.sort-item').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            document.querySelectorAll('.sort-item').forEach(b => b.classList.remove('active'))
-            e.target.classList.add('active')
-            
-            const icon = '<img src="assets/sort.svg" alt="Sort" class="icon">'
-            sortToggle.innerHTML = icon + "Sort"
-            
-            currentPage = 1
-            triggerSort(e.target.dataset.key, parseInt(e.target.dataset.dir))
-        })
-    })
+resetTagsBtn.addEventListener('click', () => {
+activeTags.clear()
+document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+executeFilter()
+})
 
-    prevBtn.onclick = () => { 
-        if(currentPage > 1) { 
-            currentPage -= 1 
-            renderList() 
-            window.scrollTo(0, 0) 
-        } 
-    }
-    
-    nextBtn.onclick = () => { 
-        if(currentPage < Math.ceil(currentProjectsData.length / itemsPerPage)) { 
-            currentPage += 1 
-            renderList() 
-            window.scrollTo(0, 0) 
-        } 
-    }
+sortToggle.addEventListener('click', (e) => {
+e.stopPropagation()
+sortMenu.classList.toggle('show')
+})
 
-    function renderList(skipAnimation = false) {
-        wrapper.innerHTML = ""
-        
-        if (currentProjectsData.length === 0) {
-            prevBtn.style.display = 'none'
-            nextBtn.style.display = 'none'
-            currentPageNum.innerText = "No matching projects found."
-            totalPagesDisplay.innerText = ""
-        } else {
-            prevBtn.style.display = ''
-            nextBtn.style.display = ''
-            const totalPages = Math.ceil(currentProjectsData.length / itemsPerPage)
-            const start = (currentPage - 1) * itemsPerPage
-            const end = start + itemsPerPage
-            const pageItems = currentProjectsData.slice(start, end)
-            
-            pageItems.forEach(p => {
-                const row = document.createElement('div')
-                row.className = 'project-row'
-                row.onclick = () => window.open(p.url, '_blank')
-                
-                row.addEventListener('mouseenter', () => {
-                    cursorText.innerText = p.title
-                    cursor.classList.add('project-hover')
-                })
-                row.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('project-hover')
-                })
+document.addEventListener('click', () => {
+sortMenu.classList.remove('show')
+})
 
-                row.innerHTML = `
-                    <div class="row-main hover-target">
-                        <div class="col-name">${p.title}</div>
-                        <div class="col-author">By ${p.author}</div>
-                        <div class="col-cat">${p.tagsInline}</div>
-                        <div class="col-date">${p.fullDate}</div>
-                    </div>
-                    <div class="row-details">
-                        <div class="inner-left">
-                            <img src="${p.imgUrl}" class="project-img" alt="${p.title}" onerror="this.style.display='none'">
-                        </div>
-                        <div class="inner-right"><div class="project-desc">${p.desc}</div></div>
-                    </div>`
-                wrapper.appendChild(row)
-            })
+document.querySelectorAll('.sort-item').forEach(btn => {
+btn.addEventListener('click', (e) => {
+document.querySelectorAll('.sort-item').forEach(b => b.classList.remove('active'))
+e.target.classList.add('active')
+const icon = '<img src="assets/sort.svg" alt="Sort" class="icon">'
+sortToggle.innerHTML = icon
+triggerSort(e.target.dataset.key, parseInt(e.target.dataset.dir))
+})
+})
 
-            currentPageNum.innerText = `${currentPage}`
-            totalPagesDisplay.innerText = ` / ${totalPages}`
-            prevBtn.disabled = currentPage === 1
-            nextBtn.disabled = currentPage === totalPages
-            
-            attachCursorEvents()
-        }
-        
-        if (skipAnimation) { 
-            wrapper.classList.remove('fading') 
-        } else { 
-            setTimeout(() => wrapper.classList.remove('fading'), 50) 
-        }
-    }
+window.addEventListener('scroll', () => {
+if (window.scrollY > 300) {
+backToTopBtn.classList.add('visible')
+} else {
+backToTopBtn.classList.remove('visible')
+}
+})
 
-    function sortDataArray() {
-        currentProjectsData.sort((a, b) => {
-            let valA = a[currentSortKey]
-            let valB = b[currentSortKey]
-            if (typeof valA === 'string') { valA = valA.toLowerCase() }
-            if (typeof valB === 'string') { valB = valB.toLowerCase() }
-            if (valA < valB) return -1 * currentSortDir
-            if (valA > valB) return 1 * currentSortDir
-            return 0
-        })
-    }
+backToTopBtn.addEventListener('click', () => {
+window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 
-    function executeFilter(skipAnimation = false) {
-        const applyLogic = () => {
-            currentProjectsData = allProjectsData.filter(p => {
-                const matchTag = activeTags.size === 0 || p.rawTags.some(tag => activeTags.has(tag))
-                const matchSearch = searchQuery === "" || 
-                                    p.title.toLowerCase().includes(searchQuery) || 
-                                    p.author.toLowerCase().includes(searchQuery) || 
-                                    p.tagsInline.toLowerCase().includes(searchQuery) ||
-                                    p.desc.toLowerCase().includes(searchQuery)
-                return matchTag && matchSearch
-            })
-            sortDataArray()
-            renderList(skipAnimation)
-        }
-        
-        if (skipAnimation) { 
-            applyLogic() 
-        } else { 
-            wrapper.classList.add('fading')
-            setTimeout(applyLogic, 300) 
-        }
-    }
+function toggleTagSelection(tagValue, skipAnimation = false) {
+const lowerTag = tagValue.toLowerCase()
+if (activeTags.has(lowerTag)) {
+activeTags.delete(lowerTag)
+} else {
+activeTags.add(lowerTag)
+}
 
-    function triggerSort(key, direction) {
-        currentSortKey = key
-        currentSortDir = direction
-        wrapper.classList.add('fading')
-        setTimeout(() => { 
-            sortDataArray()
-            renderList() 
-        }, 300)
-    }
+document.querySelectorAll('.filter-btn').forEach(btn => {
+if (activeTags.has(btn.dataset.tag.toLowerCase())) {
+btn.classList.add('active')
+} else {
+btn.classList.remove('active')
+}
+})
 
-    function formatText(str) {
-        if (!str) return ""
-        return str.trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
-    }
+executeFilter(skipAnimation)
+}
 
-    async function initIndex() {
-        try {
-            const res = await fetch('https://ixd-supsi.github.io/n70api/data.json')
-            const rawData = await res.json()
-            const baseUrl = "https://raw.githubusercontent.com/ixd-supsi/n70api/main/immagini/"
-            let uniqueTags = new Set()
-            const ALLOWED_TAGS = new Set(["2d", "3d", "apollo", "astronomy", "audio", "climate", "science", "data visualization", "earth", "planets", "educational", "game", "history", "archive", "robot", "space"])
+function renderList(skipAnimation = false) {
+wrapper.innerHTML = ""
+const totalCount = currentProjectsData.length
+resultsCount.innerText = `${totalCount} ${totalCount === 1 ? 'result' : 'results'} found`
+prevBtn.disabled = true
+nextBtn.disabled = true
+if (currentProjectsData.length === 0) {
+paginationControls.style.display = 'none'
+const msg = document.createElement('div')
+msg.className = 'no-results-msg'
+msg.innerText = "Try a different search."
+wrapper.appendChild(msg)
+} else {
+paginationControls.style.display = 'flex'
+pageDisplay.style.display = ''
+currentProjectsData.forEach(p => {
+const row = document.createElement('div')
+row.className = 'project-row'
 
-            allProjectsData = rawData.map(p => {
-                const d = p.data || {}
-                const fullDate = `${d.giorno || '01'}/${d.mese || '01'}/${d.anno || '2024'}`
-                const dateScore = parseInt(`${d.anno || 2024}${String(d.mese || 1).padStart(2,'0')}${String(d.giorno || 1).padStart(2,'0')}`)
-                const rawTagsArray = Array.isArray(p.tags) ? p.tags : []
-                const tagsArray = rawTagsArray.filter(t => ALLOWED_TAGS.has(t.toLowerCase()))
-                tagsArray.forEach(t => uniqueTags.add(t.toLowerCase()))
-                
-                const imgObj = p.immagine || {}
-                let imgFilename = ""
-                if (typeof imgObj === 'object') {
-                    const key = Object.keys(imgObj).find(k => k.endsWith('_1'))
-                    imgFilename = key ? imgObj[key] : (Object.values(imgObj)[0] || "")
-                } else {
-                    imgFilename = imgObj
-                }
+const tagsHtml = p.rawTags.map(t => {
+const isActive = activeTags.has(t.toLowerCase())
+return `<span class="project-tag ${isActive ? 'active' : ''}" data-tag="${t.toLowerCase()}">${formatText(t)}</span>`
+}).join('')
 
-                return {
-                    title: p.titolo ? p.titolo.trim() : "Untitled",
-                    desc: p.descrizione || "No description available.",
-                    imgUrl: imgFilename ? baseUrl + imgFilename : "",
-                    url: p.url || "#",
-                    author: formatText(p.autore || "Anonymous"), 
-                    fullDate: fullDate, 
-                    dateScore: dateScore, 
-                    tagsInline: tagsArray.length > 0 ? tagsArray.map(t => formatText(t)).join(', ') : "Various",
-                    rawTags: tagsArray.map(t => t.toLowerCase())
-                }
-            })
-            
-            const tagsWithCounts = Array.from(uniqueTags).map(tag => ({ tag, count: allProjectsData.filter(p => p.rawTags.includes(tag)).length }))
-            tagsWithCounts.sort((a, b) => b.count - a.count)
+const imageBlock = p.imgUrl ? `<img src="${p.imgUrl}" class="project-img" alt="${p.title}" onerror="handleImgError(this)">` : `<div class="img-placeholder"><svg viewBox="0 0 160 90" preserveAspectRatio="none"><line x1="0" y1="0" x2="160" y2="90" stroke="#000000" stroke-width="1.5"/><line x1="160" y1="0" x2="0" y2="90" stroke="#000000" stroke-width="1.5"/></svg></div>`
 
-            tagsContainer.innerHTML = ""
-            
-            const row1 = document.createElement('div')
-            row1.className = 'tag-row'
-            const row2 = document.createElement('div')
-            row2.className = 'tag-row'
-            
-            tagsContainer.appendChild(row1)
-            tagsContainer.appendChild(row2)
+row.innerHTML = `
+<div class="col-img-wrapper">
+${imageBlock}
+</div>
+<div class="col-desc">
+<div class="col-title">${p.title}</div>
+<div class="col-desc-text">${p.desc}</div>
+<div class="row-tags-container">${tagsHtml}</div>
+</div>
+<div class="col-author"><span class="author-by">By </span>${p.author}</div>
+<div class="col-date">${p.fullDate}</div>
+<div class="col-view">
+<span>View</span>
+<img src="assets/arrow.svg" class="view-arrow" alt="Arrow">
+</div>`
 
-            const btnAll = document.createElement('button')
-            btnAll.className = 'action-btn filter-btn hover-target active'
-            btnAll.dataset.tag = 'all'
-            btnAll.innerText = `All (${allProjectsData.length})`
-            
-            btnAll.onclick = () => {
-                activeTags.clear()
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
-                btnAll.classList.add('active')
-                currentPage = 1
-                executeFilter()
-            }
-            
-            row1.appendChild(btnAll)
+row.querySelector('.col-view').onclick = (e) => {
+e.stopPropagation()
+window.open(p.url, '_blank')
+}
 
-            tagsWithCounts.forEach((item, i) => {
-                const btn = document.createElement('button')
-                btn.className = 'action-btn filter-btn hover-target'
-                btn.dataset.tag = item.tag
-                btn.innerText = `${formatText(item.tag)} (${item.count})`
-                
-                btn.onclick = (e) => {
-                    if (activeTags.has(item.tag)) { 
-                        activeTags.delete(item.tag)
-                        e.target.classList.remove('active') 
-                    } else { 
-                        activeTags.add(item.tag)
-                        e.target.classList.add('active') 
-                    }
-                    if (activeTags.size === 0) {
-                        btnAll.classList.add('active')
-                    } else {
-                        btnAll.classList.remove('active')
-                    }
-                    currentPage = 1
-                    executeFilter()
-                }
-                
-                if (i < 7) {
-                    row1.appendChild(btn)
-                } else {
-                    row2.appendChild(btn)
-                }
-            })
+row.querySelectorAll('.project-tag').forEach(tagElement => {
+tagElement.onclick = (e) => {
+e.stopPropagation()
+toggleTagSelection(tagElement.dataset.tag, true)
+}
+})
 
-            currentProjectsData = [...allProjectsData]
-            sortDataArray()
-            renderList()
-            
-        } catch (err) { 
-            console.error("API Fetch Error:", err) 
-        }
-    }
-    
-    initIndex()
+wrapper.appendChild(row)
+})
+
+currentPageNum.innerText = "1"
+totalPagesDisplay.innerText = "/1"
+}
+if (skipAnimation) {
+wrapper.classList.remove('fading')
+} else {
+setTimeout(() => wrapper.classList.remove('fading'), 50)
+}
+}
+
+function sortDataArray() {
+if (activeTags.size > 0) {
+currentProjectsData.forEach(p => {
+p.matchCount = p.rawTags.filter(tag => activeTags.has(tag.toLowerCase())).length
+})
+}
+
+currentProjectsData.sort((a, b) => {
+if (activeTags.size > 0) {
+if (a.matchCount > b.matchCount) return -1
+if (a.matchCount < b.matchCount) return 1
+}
+
+if (currentSortDir === 0) {
+return a.randomScore - b.randomScore
+}
+
+let valA = a[currentSortKey]
+let valB = b[currentSortKey]
+if (currentSortKey === 'views') {
+if (valA < valB) return -1 * currentSortDir
+if (valA > valB) return 1 * currentSortDir
+return 0
+}
+
+if (typeof valA === 'string') { valA = valA.toLowerCase() }
+if (typeof valB === 'string') { valB = valB.toLowerCase() }
+if (valA < valB) return -1 * currentSortDir
+if (valA > valB) return 1 * currentSortDir
+return 0
+})
+}
+
+function executeFilter(skipAnimation = false) {
+const applyLogic = () => {
+currentProjectsData = allProjectsData.filter(p => {
+const matchTag = activeTags.size === 0 || p.rawTags.some(tag => activeTags.has(tag))
+const matchSearch = searchQuery === "" ||
+p.title.toLowerCase().includes(searchQuery) ||
+p.author.toLowerCase().includes(searchQuery) ||
+p.tagsInline.toLowerCase().includes(searchQuery) ||
+p.desc.toLowerCase().includes(searchQuery)
+return matchTag && matchSearch
+})
+sortDataArray()
+renderList(skipAnimation)
+}
+if (skipAnimation) {
+applyLogic()
+} else {
+wrapper.classList.add('fading')
+setTimeout(applyLogic, 300)
+}
+}
+
+function triggerSort(key, direction) {
+currentSortKey = key
+currentSortDir = direction
+if (key === 'views' && direction === 0) {
+allProjectsData.forEach(p => {
+p.randomScore = Math.random()
+})
+}
+wrapper.classList.add('fading')
+setTimeout(() => {
+sortDataArray()
+renderList()
+}, 300)
+}
+
+function formatText(str) {
+if (!str) return ""
+return str.trim().toLowerCase().replace(/(?:^|[\s\-])\s*[a-z]/g, (match) => match.toUpperCase())
+}
+
+async function initIndex() {
+try {
+const res = await fetch('https://ixd-supsi.github.io/n70api/data.json')
+const rawData = await res.json()
+const baseUrl = "https://raw.githubusercontent.com/ixd-supsi/n70api/main/immagini/"
+let uniqueTags = new Set()
+
+allProjectsData = rawData.map(p => {
+const d = p.data || {}
+const monthStr = String(d.mese || 1).padStart(2, '0')
+const dayStr = String(d.giorno || 1).padStart(2, '0')
+const fullDate = `${monthStr}/${dayStr}/${d.anno || '2024'}`
+const dateScore = parseInt(`${d.anno || 2024}${monthStr}${dayStr}`)
+const rawTagsArray = Array.isArray(p.tags) ? p.tags : []
+const processedTags = rawTagsArray.map(t => t.trim().toLowerCase()).filter(t => t.length > 0)
+processedTags.sort((a, b) => a.localeCompare(b))
+processedTags.forEach(t => {
+uniqueTags.add(t)
+})
+const imgObj = p.immagine || {}
+let imgFilename = ""
+if (typeof imgObj === 'object') {
+const key = Object.keys(imgObj).find(k => k.endsWith('_1'))
+imgFilename = key ? imgObj[key] : (Object.values(imgObj)[0] || "")
+} else {
+imgFilename = imgObj
+}
+
+const titleStr = p.titolo ? p.titolo.trim() : "Untitled"
+const charArray = titleStr.split('')
+let charSum = 0
+charArray.forEach(c => {
+charSum += c.charCodeAt(0)
+})
+const pseudoViews = (charSum * 37) % 9973
+
+return {
+title: titleStr,
+desc: p.descrizione || "No description available.",
+imgUrl: imgFilename ? baseUrl + imgFilename : "",
+url: p.url || "#",
+author: formatText(p.autore || "Anonymous"),
+fullDate: fullDate,
+dateScore: dateScore,
+tagsInline: processedTags.length > 0 ? processedTags.map(t => formatText(t)).join(', ') : "Various",
+rawTags: processedTags,
+views: pseudoViews,
+randomScore: Math.random()
+}
+})
+const tagsWithCounts = Array.from(uniqueTags).map(tag => ({ tag, count: allProjectsData.filter(p => p.rawTags.includes(tag)).length }))
+tagsWithCounts.sort((a, b) => {
+if (b.count !== a.count) {
+return b.count - a.count
+}
+return a.tag.localeCompare(b.tag)
+})
+
+tagsContainer.innerHTML = ""
+
+tagsWithCounts.forEach((item) => {
+const btn = document.createElement('button')
+btn.className = 'action-btn filter-btn'
+btn.dataset.tag = item.tag
+btn.innerText = `${formatText(item.tag)} (${item.count})`
+btn.onclick = (e) => {
+toggleTagSelection(item.tag)
+}
+tagsContainer.appendChild(btn)
+})
+
+currentProjectsData = [...allProjectsData]
+sortDataArray()
+renderList()
+
+const copyrightEl = document.querySelector('.about-col-1')
+if (copyrightEl) {
+copyrightEl.classList.add('visible')
+}
+
+} catch (err) {
+console.error("API Fetch Error:", err)
+}
+}
+initIndex()
 </script>
 
 </body>
