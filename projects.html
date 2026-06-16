@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NASA 70 | Projects</title>
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/imgs/logo.svg" type="image/svg+xml">
 <style>
 :root { --bg: #f6f6f6 }
 :root { --text: #000000 }
-:root { --text-50: #7c7c7c }
-:root { --text-30: #b2b2b2 }
+:root { --text-50: #959595 }
+:root { --text-30: #959595 }
 :root { --ui-font: 'Helvetica', 'HelveticaFallback', sans-serif }
 :root { --ease: cubic-bezier(0.19, 1, 0.22, 1) }
 
@@ -90,6 +90,7 @@ nav a { cursor: pointer }
 .sidebar { flex-direction: column }
 
 .about-col-1 { padding-right: 20px }
+.about-col-1 { padding-top: 50px }
 .about-col-1 { font-weight: 400 }
 .about-col-1 { margin-top: auto }
 .about-col-1 { opacity: 0 }
@@ -191,6 +192,16 @@ nav a { cursor: pointer }
 .sort-only-btn { align-items: center }
 .sort-only-btn { justify-content: center }
 .sort-only-btn { color: var(--text) }
+.sort-only-btn { transition: all 0.3s var(--ease) }
+
+.sort-only-btn:hover { background: var(--text) }
+.sort-only-btn:hover { color: var(--bg) }
+.sort-only-btn.active { background: var(--text) }
+.sort-only-btn.active { color: var(--bg) }
+
+.sort-only-btn .icon { transition: filter 0.3s var(--ease) }
+.sort-only-btn:hover .icon { filter: invert(1) }
+.sort-only-btn.active .icon { filter: invert(1) }
 
 .search-container { display: flex }
 .search-container { align-items: center }
@@ -358,18 +369,26 @@ nav a { cursor: pointer }
 .col-view { color: #D83933 }
 .col-view { font-weight: 600 }
 .col-view { cursor: pointer }
-.view-arrow { height: 12px }
-.view-arrow { width: auto }
+
+.view-arrow { width: 18px }
+.view-arrow { height: 18px }
 .view-arrow { display: block }
-.view-arrow { filter: invert(26%) sepia(74%) saturate(4157%) hue-rotate(347deg) brightness(92%) contrast(87%) }
 
 #pagination-controls { padding-top: 40px }
-#pagination-controls { display: flex }
-#pagination-controls { align-items: center }
-#pagination-controls { gap: 20px }
+#pagination-controls { display: grid }
+#pagination-controls { grid-template-columns: 12% 43% 15% 10% 8% }
+#pagination-controls { gap: 3% }
 #pagination-controls { font-size: 16px }
 #pagination-controls { font-weight: 400 }
 #pagination-controls { color: var(--text) }
+#pagination-controls { margin-top: auto }
+#pagination-controls { align-items: center }
+
+.pagination-content { display: flex }
+.pagination-content { align-items: center }
+.pagination-content { gap: 20px }
+.pagination-content { grid-column: 1 / 4 }
+
 #pagination-controls .nav-btn { color: var(--text) }
 #pagination-controls .nav-btn:disabled { color: var(--text-30) }
 #pagination-controls .nav-btn:disabled { cursor: default }
@@ -395,26 +414,35 @@ nav a { cursor: pointer }
 .back-to-top-btn { cursor: pointer }
 .back-to-top-btn { opacity: 0 }
 .back-to-top-btn { pointer-events: none }
-.back-to-top-btn { transition: opacity 0.3s var(--ease) }
+.back-to-top-btn { transition: all 0.3s var(--ease) }
 .back-to-top-btn { z-index: 10000 }
+.back-to-top-btn { color: var(--text) }
+
 .back-to-top-btn.visible { opacity: 1 }
 .back-to-top-btn.visible { pointer-events: auto }
 
-.up-arrow { height: 14px }
-.up-arrow { width: auto }
-.up-arrow { transform: rotate(-90deg) }
+.back-to-top-btn:hover { background: var(--text) }
+.back-to-top-btn:hover { color: var(--bg) }
 
 @media (min-width: 1450px) {
 .project-row { grid-template-columns: 160px 3.5fr 1.5fr 1fr 70px }
 .project-row { gap: 30px }
+
+#pagination-controls { grid-template-columns: 160px 3.5fr 1.5fr 1fr 70px }
+#pagination-controls { gap: 30px }
 }
 
 @media (max-width: 1350px) {
 .layout-grid { flex-direction: column }
 .layout-grid { gap: 40px }
+.layout-grid { position: relative }
 .sidebar { width: 100% }
 .about-col-1 { padding-right: 0 }
-.about-col-1 { margin-top: 40px }
+.about-col-1 { padding-top: 0 }
+.about-col-1 { margin-top: 0 }
+.about-col-1 { position: absolute }
+.about-col-1 { bottom: 20px }
+.about-col-1 { left: 20px }
 .hidden-title { display: none }
 .project-row { position: relative }
 .project-row { display: grid }
@@ -436,6 +464,11 @@ nav a { cursor: pointer }
 .col-view { position: absolute }
 .col-view { top: 12px }
 .col-view { right: 0 }
+
+#pagination-controls { grid-template-columns: 22% max-content 1fr }
+#pagination-controls { gap: 0 4% }
+#pagination-controls { padding-right: 70px }
+.pagination-content { grid-column: 2 / 4 }
 }
 
 @media (max-width: 950px) {
@@ -455,6 +488,11 @@ nav a { cursor: pointer }
 .col-date { grid-row: 2 / 3 }
 .col-date { margin-top: 15px }
 .col-date { padding-top: 0 }
+
+#pagination-controls { grid-template-columns: 25% 40% 1fr }
+#pagination-controls { gap: 4% }
+#pagination-controls { padding-right: 60px }
+.pagination-content { grid-column: 2 / 4 }
 }
 
 @media (max-width: 650px) {
@@ -497,6 +535,11 @@ nav a { cursor: pointer }
 .search-container { flex-grow: 1 }
 .search-container { width: auto }
 
+#pagination-controls { display: flex }
+#pagination-controls { padding-right: 0 }
+.pagination-content { width: 100% }
+.pagination-content { justify-content: center }
+
 .back-to-top-btn { bottom: 20px }
 .back-to-top-btn { right: 20px }
 }
@@ -509,7 +552,7 @@ nav a { cursor: pointer }
 <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
 </div>
 <div class="logo-container">
-<img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
+<img src="assets/imgs/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
 </div>
 <nav>
 <a href="projects.html" class="hover-target">Projects</a>
@@ -539,7 +582,7 @@ NASA © 2026
 <div class="search-sort-wrapper">
 <div class="custom-dropdown">
 <button class="action-btn dropdown-toggle sort-only-btn" id="sort-toggle">
-<img src="assets/sort.svg" alt="Sort" class="icon">
+<img src="assets/icons/sort.svg" alt="Sort" class="icon">
 </button>
 <div class="dropdown-menu" id="sort-menu">
 <button class="dropdown-item sort-item active" data-key="views" data-dir="0">Random</button>
@@ -554,9 +597,9 @@ NASA © 2026
 </div>
 </div>
 <div class="search-container">
-<img src="assets/search.svg" alt="Search" class="icon">
+<img src="assets/icons/search.svg" alt="Search" class="icon">
 <input type="text" id="search-input" class="search-input" placeholder="Search..." autocomplete="off" spellcheck="false">
-<img src="assets/delete.svg" alt="Clear search" class="icon clear-icon" id="clear-search-btn">
+<img src="assets/icons/delete.svg" alt="Clear search" class="icon clear-icon" id="clear-search-btn">
 </div>
 </div>
 </div>
@@ -564,21 +607,26 @@ NASA © 2026
 <div id="index-wrapper"></div>
 
 <div id="pagination-controls">
+<div class="pagination-content">
 <button class="action-btn nav-btn" id="prev-btn" disabled>Previous</button>
 <span id="page-display"><span id="current-page-num">1</span><span id="total-pages-display">/1</span></span>
 <button class="action-btn nav-btn" id="next-btn" disabled>Next</button>
 </div>
+</div>
 </main>
 </div>
 
-<button id="back-to-top" class="back-to-top-btn">
-<img src="assets/arrow.svg" alt="Torna in cima" class="up-arrow">
+<button id="back-to-top" class="back-to-top-btn" aria-label="Torna in cima">
+<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10">
+<line x1="12" y1="22" x2="12" y2="2"></line>
+<polyline points="5 9 12 2 19 9"></polyline>
+</svg>
 </button>
 
 <script>
-const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
-const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
-const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
+const fontRoman = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Roman.otf")', { weight: '400' })
+const fontMedium = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Roman.otf")', { weight: '500' })
+const fontBold = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Bold.otf")', { weight: '600' })
 
 fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
 fontMedium.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 500 locale assente"))
@@ -640,17 +688,19 @@ executeFilter()
 sortToggle.addEventListener('click', (e) => {
 e.stopPropagation()
 sortMenu.classList.toggle('show')
+sortToggle.classList.toggle('active')
 })
 
 document.addEventListener('click', () => {
 sortMenu.classList.remove('show')
+sortToggle.classList.remove('active')
 })
 
 document.querySelectorAll('.sort-item').forEach(btn => {
 btn.addEventListener('click', (e) => {
 document.querySelectorAll('.sort-item').forEach(b => b.classList.remove('active'))
 e.target.classList.add('active')
-const icon = '<img src="assets/sort.svg" alt="Sort" class="icon">'
+const icon = '<img src="assets/icons/sort.svg" alt="Sort" class="icon">'
 sortToggle.innerHTML = icon
 triggerSort(e.target.dataset.key, parseInt(e.target.dataset.dir))
 })
@@ -700,7 +750,7 @@ msg.className = 'no-results-msg'
 msg.innerText = "Try a different search."
 wrapper.appendChild(msg)
 } else {
-paginationControls.style.display = 'flex'
+paginationControls.style.display = ''
 pageDisplay.style.display = ''
 currentProjectsData.forEach(p => {
 const row = document.createElement('div')
@@ -726,7 +776,10 @@ ${imageBlock}
 <div class="col-date">${p.fullDate}</div>
 <div class="col-view">
 <span>View</span>
-<img src="assets/arrow.svg" class="view-arrow" alt="Arrow">
+<svg class="view-arrow" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10">
+<line x1="2" y1="12" x2="22" y2="12"></line>
+<polyline points="15 5 22 12 15 19"></polyline>
+</svg>
 </div>`
 
 row.querySelector('.col-view').onclick = (e) => {
@@ -840,8 +893,11 @@ allProjectsData = rawData.map(p => {
 const d = p.data || {}
 const monthStr = String(d.mese || 1).padStart(2, '0')
 const dayStr = String(d.giorno || 1).padStart(2, '0')
-const fullDate = `${monthStr}/${dayStr}/${d.anno || '2024'}`
-const dateScore = parseInt(`${d.anno || 2024}${monthStr}${dayStr}`)
+const annoNum = d.anno || 2024
+const dateObj = new Date(annoNum, (d.mese || 1) - 1, d.giorno || 1)
+const fullDate = dateObj.toLocaleDateString(navigator.language, { day: '2-digit', month: '2-digit', year: 'numeric' })
+const dateScore = parseInt(`${annoNum}${monthStr}${dayStr}`)
+
 const rawTagsArray = Array.isArray(p.tags) ? p.tags : []
 const processedTags = rawTagsArray.map(t => t.trim().toLowerCase()).filter(t => t.length > 0)
 processedTags.sort((a, b) => a.localeCompare(b))
