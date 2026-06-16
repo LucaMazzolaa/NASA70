@@ -45,17 +45,17 @@ Nella mia interpretazione progettuale, il logo celebrativo sostituisce temporane
 
 
 ### 1. NASA 70 (index.html)
-
+<img width="4000" height="1994" alt="03" src="https://github.com/user-attachments/assets/eb8c0e9b-03f2-43d5-81ed-6f02b8922474" />
 
 La Homepage si distingue per un approccio immersivo e non convenzionale. Invece di una struttura statica, l’utente si trova di fronte a un’unica immagine di copertina che diventa spazio di esplorazione. Attraverso lo scroll o il trascinamento, è possibile navigare all’interno di questa superficie visiva continua, scoprendo progressivamente i diversi progetti senza uscire dalla dimensione principale. L’unica azione di uscita dall’esperienza è la selezione di un elemento, che conduce direttamente alla pagina del progetto scelto.
 
 ### 2. Projects (projects.html)
-
+<img width="4000" height="1994" alt="032" src="https://github.com/user-attachments/assets/94819b16-ebe2-4355-8821-644bc98916b3" />
 
 La sezione Projects adotta invece una struttura più tradizionale e funzionale, organizzata come una lista di contenuti consultabili. Questa area permette una navigazione più analitica dei progetti, supportata da strumenti di ricerca, ordinamento e filtraggio che facilitano l’esplorazione dei dati in base a categorie e criteri specifici.
 
 ### 3. About (about.html)
-
+<img width="4000" height="1994" alt="033" src="https://github.com/user-attachments/assets/433c5b8a-dfbf-4433-829a-85b9e9474d1d" />
 
 La sezione About è concepita come uno spazio esclusivamente tipografico, dedicato alla spiegazione dell’iniziativa e delle sue finalità. Qui vengono presentati il contesto del progetto e le informazioni necessarie per comprenderne la struttura e le modalità di funzionamento, offrendo una lettura chiara e diretta dell’intero sistema.
 
