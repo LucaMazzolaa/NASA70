@@ -4,9 +4,9 @@ Docenti: A. Gysin, G. Profeta
 
 Progetto 1: La conquista dello spazio
 
-# NASA70
+# NASA 70
 Autore: Luca Mazzola \
-[NASA70](https://lucamazzolaa.github.io/NASA70/)
+[NASA 70](https://lucamazzolaa.github.io/NASA70/)
 
 
 ## Introduzione e tema
