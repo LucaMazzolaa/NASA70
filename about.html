@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NASA 70 | About</title>
-<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="assets/imgs/logo.svg" type="image/svg+xml">
 <style>
 :root { --bg: #f6f6f6 }
 :root { --text: #000000 }
@@ -172,7 +172,7 @@ nav a { cursor: pointer }
 <span class="site-title hover-target" onclick="window.location.href='index.html'">NASA 70</span>
 </div>
 <div class="logo-container">
-<img src="assets/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
+<img src="assets/imgs/logo.svg" alt="N70 Logo" class="hover-target" onclick="window.open('https://www.nasa.gov/', '_blank')">
 </div>
 <nav>
 <a href="projects.html" class="hover-target">Projects</a>
@@ -208,9 +208,9 @@ These projects have been developed by students from different schools, working w
 </div>
 
 <script>
-const fontRoman = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '400' })
-const fontMedium = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Roman.otf")', { weight: '500' })
-const fontBold = new FontFace('HelveticaFallback', 'url("assets/helvetica/HelveticaLTStd-Bold.otf")', { weight: '600' })
+const fontRoman = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Roman.otf")', { weight: '400' })
+const fontMedium = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Roman.otf")', { weight: '500' })
+const fontBold = new FontFace('HelveticaFallback', 'url("assets/font/HelveticaLTStd-Bold.otf")', { weight: '600' })
 
 fontRoman.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 400 locale assente"))
 fontMedium.load().then(f => document.fonts.add(f)).catch(e => console.warn("Font 500 locale assente"))
