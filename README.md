@@ -4,9 +4,9 @@ Docenti: A. Gysin, G. Profeta
 
 Progetto 1: La conquista dello spazio
 
-# NASA70
+# NASA 70
 Autore: Luca Mazzola \
-[NASA70](https://lucamazzolaa.github.io/NASA70/)
+[NASA 70](https://lucamazzolaa.github.io/NASA70/)
 
 
 ## Introduzione e tema
@@ -32,31 +32,30 @@ L’interfaccia del progetto è organizzata secondo una struttura chiara e minim
 | 3 | **`about.html`** | About | Sezione informativa dedicata al contesto del progetto |
 
 ### Menu globale fisso
+<img width="1919" height="81" alt="menu" src="https://github.com/user-attachments/assets/ae9e3bbf-d2e1-4af5-a2de-bebe4aafd672" />
 
-
-Il menu superiore costituisce l’elemento di navigazione principale e presenta il nome del progetto sulla sinistra, il logo dedicato al 70º anniversario della NASA al centro, riprendendo la posizione occupata dal marchio nel sito ufficiale dell’agenzia, e le sezioni Projects e About sulla destra, garantendo un accesso immediato alle diverse aree della piattaforma.
+Il menu superiore costituisce l’elemento di navigazione principale e presenta il nome del progetto sulla sinistra, il logo dedicato al 70º anniversario della NASA al centro, riprendendo la posizione occupata dal marchio nel sito ufficiale dell’agenzia, e le pagine Projects e About sulla destra, garantendo un accesso immediato alle diverse aree della piattaforma.
 
 
 ### Logo
-<img width="4000" height="667" alt="logo" src="https://github.com/user-attachments/assets/b07b6ff0-8850-4174-8395-69e8db1b3d92" />
-
+<img width="4000" height="667" alt="logo" src="https://github.com/user-attachments/assets/d7a2509f-6b9e-498a-bc6b-a964cf57abd4" />
 
 Il progetto mantiene il logo storico della NASA come elemento centrale dell’identità visiva, preservandone la riconoscibilità istituzionale e il valore simbolico. Al logo si affianca un 7 geometrico, ispirato al concept del logo realizzato per il 40º anniversario, scelto come riferimento per la sua capacità di sintetizzare celebrazione e chiarezza formale. Questa soluzione permette di costruire un segno grafico coerente con il 70º anniversario, mantenendo un equilibrio tra tradizione e reinterpretazione contemporanea.
 Nella mia interpretazione progettuale, il logo celebrativo sostituisce temporaneamente il marchio NASA all'interno del sito ufficiale per tutta la durata delle celebrazioni del 70º anniversario.
 
 
 ### 1. NASA 70 (index.html)
-
+<img width="4000" height="1994" alt="03" src="https://github.com/user-attachments/assets/eb8c0e9b-03f2-43d5-81ed-6f02b8922474" />
 
 La Homepage si distingue per un approccio immersivo e non convenzionale. Invece di una struttura statica, l’utente si trova di fronte a un’unica immagine di copertina che diventa spazio di esplorazione. Attraverso lo scroll o il trascinamento, è possibile navigare all’interno di questa superficie visiva continua, scoprendo progressivamente i diversi progetti senza uscire dalla dimensione principale. L’unica azione di uscita dall’esperienza è la selezione di un elemento, che conduce direttamente alla pagina del progetto scelto.
 
 ### 2. Projects (projects.html)
-
+<img width="4000" height="1994" alt="032" src="https://github.com/user-attachments/assets/94819b16-ebe2-4355-8821-644bc98916b3" />
 
 La sezione Projects adotta invece una struttura più tradizionale e funzionale, organizzata come una lista di contenuti consultabili. Questa area permette una navigazione più analitica dei progetti, supportata da strumenti di ricerca, ordinamento e filtraggio che facilitano l’esplorazione dei dati in base a categorie e criteri specifici.
 
 ### 3. About (about.html)
-
+<img width="4000" height="1994" alt="033" src="https://github.com/user-attachments/assets/433c5b8a-dfbf-4433-829a-85b9e9474d1d" />
 
 La sezione About è concepita come uno spazio esclusivamente tipografico, dedicato alla spiegazione dell’iniziativa e delle sue finalità. Qui vengono presentati il contesto del progetto e le informazioni necessarie per comprenderne la struttura e le modalità di funzionamento, offrendo una lettura chiara e diretta dell’intero sistema.
 
