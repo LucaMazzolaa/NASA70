@@ -38,8 +38,7 @@ Il menu superiore costituisce l’elemento di navigazione principale e presenta 
 
 
 ### Logo
-<img width="4000" height="667" alt="logo" src="https://github.com/user-attachments/assets/b07b6ff0-8850-4174-8395-69e8db1b3d92" />
-
+<img width="4000" height="667" alt="logo" src="https://github.com/user-attachments/assets/d7a2509f-6b9e-498a-bc6b-a964cf57abd4" />
 
 Il progetto mantiene il logo storico della NASA come elemento centrale dell’identità visiva, preservandone la riconoscibilità istituzionale e il valore simbolico. Al logo si affianca un 7 geometrico, ispirato al concept del logo realizzato per il 40º anniversario, scelto come riferimento per la sua capacità di sintetizzare celebrazione e chiarezza formale. Questa soluzione permette di costruire un segno grafico coerente con il 70º anniversario, mantenendo un equilibrio tra tradizione e reinterpretazione contemporanea.
 Nella mia interpretazione progettuale, il logo celebrativo sostituisce temporaneamente il marchio NASA all'interno del sito ufficiale per tutta la durata delle celebrazioni del 70º anniversario.
