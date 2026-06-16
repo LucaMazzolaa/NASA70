@@ -130,7 +130,7 @@ const material = new THREE.ShaderMaterial({
 
 
 ### 2. Fetch dati e Texturing dinamico (API e CanvasTexture)
-L’architettura carica i riferimenti progettuali in modo asincrono da un endpoint JSON esterno. Parallelamente, per visualizzare la tipografia all'interno dello spazio 3D, un nastro di testo scorrevole viene disegnato dinamicamente su un elemento nativo HTML Canvas e convertito in una `CanvasTexture` continua, applicata poi come rivestimento ai modelli geometrici.
+L’architettura carica i riferimenti progettuali in modo asincrono da un endpoint JSON esterno. Parallelamente, per visualizzare la tipografia all’interno dello spazio 3D, un nastro di testo scorrevole viene disegnato dinamicamente su un elemento nativo HTML Canvas e convertito in una `CanvasTexture` continua, applicata poi come rivestimento ai modelli geometrici.
 
 **HTML**
 ```html
@@ -181,7 +181,7 @@ textTexture.wrapT = THREE.RepeatWrapping
 
 
 ### 3. Griglia infinita e interazione Pixel-Perfect (WebGLRenderTarget)
-La navigazione fluida e sconfinata è ottenuta matematicamente riposizionando gli elementi che escono dal campo visivo sul lato opposto della scena durante il ciclo di rendering (`requestAnimationFrame`). Per gestire l'interazione del cursore si è implementato un sistema di "Color Picking": la scena viene fotografata fuori schermo assegnando un colore univoco a ciascun elemento per identificare l'oggetto puntato analizzando le coordinate del pixel selezionato.
+La navigazione fluida e sconfinata è ottenuta matematicamente riposizionando gli elementi che escono dal campo visivo sul lato opposto della scena durante il ciclo di rendering (`requestAnimationFrame`). Per gestire l’interazione del cursore si è implementato un sistema di "Color Picking": la scena viene fotografata fuori schermo assegnando un colore univoco a ciascun elemento per identificare l’oggetto puntato analizzando le coordinate del pixel selezionato.
 
 **HTML**
 ```html
@@ -279,4 +279,4 @@ function animate() {
 ## Target e contesto d’uso
 Il progetto è rivolto a un pubblico generalista internazionale, proveniente da diverse aree geografiche del mondo, interessato allo spazio, alla divulgazione scientifica e alle modalità contemporanee di visualizzazione dei dati. L’interfaccia è pensata per essere accessibile a utenti di età eterogenea, indicativamente da adolescenti e studenti fino a un pubblico adulto, senza richiedere competenze tecniche o scientifiche specifiche.
 
-Il contesto ideale di fruizione è quello digitale e quotidiano, attraverso dispositivi personali come computer, tablet o smartphone, ma anche in ambienti educativi e culturali come scuole, università e spazi espositivi legati alla scienza e alla ricerca. Il progetto si presta inoltre a una fruizione autonoma e internazionale, favorendo un’esplorazione libera e immersiva dei contenuti da parte di utenti con background e livelli di esperienza differenti.
+Il contesto ideale di fruizione è quello digitale e quotidiano, principalmente attraverso computer, poiché l’interfaccia è stata progettata e ottimizzata per questo tipo di dispositivo e risulta solo parzialmente adattabile a finestre più piccole. Il progetto può comunque essere consultato anche in ambienti educativi e culturali come scuole, università e spazi espositivi legati alla scienza e alla ricerca.
